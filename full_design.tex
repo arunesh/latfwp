@@ -223,9 +223,15 @@ class sample_contract : public latitude::Contract {
 
 Typical smart contracts are public, including the data they operate on. For privacy or other reasons, it might be
 desirable to achieve consensus on data without making it open on the chain. Latitude supports what are called secret
-contracts using multi-party key distribution protocols. We shall leverage existing MPC communication protocols in this
-area to create a secret contract system similar to the one used in Enigma \cite{enigma}.
+contracts using multi-party key distribution protocols. Multi-party key distribution creates a set of keys, such that a
+function (or a smart contract) can be computed in a distributed manner over a random piece of data without any single
+entity having full access to the data. The result of the computation has consensus and can be put on-chain using a
+cyrptographic proof or can be directly communicated to a decentralized  app.
 
+The availability of Trusted Execution Environments or hardware enclave can dramatically assist in the implementation of
+secret contracts. In the first version of Latitude, we shall use existing MPC communication protocols in this area to
+create a secret contract system similar to the one used in Enigma \cite{enigma}. In a later version, it might become
+possible to use TEEs using a design similar to Ekiden \cite{ekiden}.
 
 % Smart contract system for Transportation
 % applications.  - Ability to convert “policies” such as GDPR into smart contract code.  - Example, self destruct data
