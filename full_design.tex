@@ -19,6 +19,30 @@ mapping, traffic, driving data including data relating to other modalities of tr
 routes later on). Figure \ref{fig:lat-arch} presents the architecture of the Latitude blockchain in terms of the core
 technological innovations that will be built into it.
 
+\subsection{Architecture overview}
+
+\begin{itemize}
+    \item Explain the overall architecture.
+    \item Side chains. Main chain.
+    \item how the chains interact.
+    \item How the cross-chain transactions are committed.
+
+\end{itemize}
+
+\subsection{Base Blockchain layer}
+
+Blocks, proof of stake, transaction velocity.
+
+Delegated proof of stake system where a set of "delegates" are used. The delegates are "promoted" based on time-based
+trust or stake (or a combination of these). This design is similar to the Cosmos blockchain and differs from other dPOS
+system such as EOS.
+
+Implementation using Tendermint or plasma chains. Only Merkle proof is
+committed. There can be any number of side-chains. But side-chains would correspond to one of the application platforms
+described later.
+
+PBFT for consensus on high volume side-chain commitments.
+
 \subsection{Spatial datastore}
 One of the central aspects of the Latitude blockchain is a geo-spatial datastore that fundamentally understands various
 datatypes that are specific to transportation data. This datastore can use existing GIS databases that allow
