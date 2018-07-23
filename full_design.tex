@@ -263,6 +263,18 @@ possible to use TEEs using a design similar to Ekiden \cite{ekiden}.
 % Statistics.  - Enforcing or verifying privacy and other govt policies/regulations.
 
 
+\subsubsection{Contract sharding}
+
+Latitude smart contracts will be sharded to improve performance. Existing blockchains such as Ethereum, Neo and EOS
+suffer from slow throughput on smart contract execution. One technique that has recently emerged as a way to scale
+performance is to shard the contract using annonatations on methods to expose specific semantics. For example, by
+understanding portions of a smart contract that store data, that verify computations and that are callbacks from
+user-facing apps, it becomes possible to separate the execution among parallel nodes for much higher throughput
+\cite{chainspace}. 
+
+Much like the other components, Latitude's smart contract sharding system shall leverage available algorithm libraries
+and tools for rapid and iterative development.
+
 \subsection{Cryptoeconomics and Governance}
 
 Crytpeconomics and governance refer to the incentive structure in the Latitude blockchain and the decentralized decision
