@@ -34,6 +34,10 @@ while allowing for summaries or Merklized proofs of transactions to be commited 
 
 \end{itemize}
 
+Each application vertical utilizes atleast one side-chain. Depending on the application, it might be necessary for
+multiple side-chains to exist within a vertical, in which case we shall use composable side-chains similar to Plasma.
+This allows for a hierarchical side-chain structure if needed with eventual commitment to the mainchain.
+
 Implementation Note: For the alpha version of Latitude, it might be possible to use an existing chain with high
 transaction velocity and low cost, such as EOS, Neo, Zilliqa or Harmony as a drop-in replacement for the base chain
 functionality. In the long term, it might be beneficial to have our own base-chain with built in smart contract
@@ -46,6 +50,13 @@ Blocks, proof of stake, transaction velocity.
 Delegated proof of stake system where a set of "delegates" are used. The delegates are "promoted" based on time-based
 trust or stake (or a combination of these). This design is similar to the Cosmos blockchain and differs from other dPOS
 system such as EOS.
+
+The Delegated Proof of Stake (dPOS) takes the best of both cooperative and competitive consensus algorithms. DPoS uses
+votes from stakeholders to achieve consensus. The competitive part is larger stakeholders having an influence on their
+delegate of choice. In Latitude, it is also possible to gain a larger stake by accruing what we call "trust" through
+honest operation over a period of time. The delegates that have the most votes will take their turn to produce a block
+cooperatively in a sequence. DPoS is also scalable because anyone can participate in the consensus. Additionally, DPoS
+is environmentally friendly because electricity isn’t wasted like in Proof of Work.
 
 Implementation using Tendermint or plasma chains. Only Merkle proof is
 committed. There can be any number of side-chains. But side-chains would correspond to one of the application platforms

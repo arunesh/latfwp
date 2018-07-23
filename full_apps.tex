@@ -26,7 +26,17 @@ Latitude shall provide a mobile SDK and a blockchain API specifically to suit ri
 would allow the creation of decentralized ride sharing apps that can provide users with incentives to share data,
 subsidize rides and provide a better deal for ride providers. They can also allow regulators to enforce the use of
 roads, lanes, parking and other structures in accordance with city or neighborhood ordinances. Latitude's SDK shall also
-provide a multi-modal ride API that such apps can use to request rides on the platform.
+provide a multi-modal ride API that such apps can use to request rides on the platform. 
+
+An app that integrates with the ridesharing SDK becomes a trusted data provider. Further verification of the letigmacy
+of the data source can be performed by integrating with Trusted Execution Environments (TEEs) available on most iOS and
+Android phones today.
+
+\noindent
+{\em Side-chain design:} The design of the ride-share side-chain shall include token rewards for contributing data. The
+reward mechanism shall be provided using a vetted smart contract system. The spatial datastore shall be used for hosting
+the data. The side-chain shall also host applications that use the data in accordance with the data contract between the
+data providers and the app developers.
 
 As an preferred third-party integration, Latitude shall integrate with SherpaShare's platform for drivers. This would
 allow greater sharing of the geo-spatial and driving data collected through SherpaShare's driver app. This will be one
