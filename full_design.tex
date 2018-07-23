@@ -243,6 +243,15 @@ class sample_contract : public latitude::Contract {
 }
 \end{lstlisting}
 
+\begin{itemize}
+
+    \item Explain action methods.
+    \item Data structures.
+    \item Callback methods.
+    \item Events.
+
+\end{itemize}
+
 \subsubsection{Secret contracts}
 
 Typical smart contracts are public, including the data they operate on. For privacy or other reasons, it might be
@@ -271,6 +280,14 @@ performance is to shard the contract using annonatations on methods to expose sp
 understanding portions of a smart contract that store data, that verify computations and that are callbacks from
 user-facing apps, it becomes possible to separate the execution among parallel nodes for much higher throughput
 \cite{chainspace}. 
+
+For example, in a given smart contract, certain data structures are annotated to store data. The dependencies between
+the data structures is also specified as a group. There are three kinds of methods: Actions, callbacks and Verifiers. 
+The Callbacks are used by the system to update the contract when a data or event happens, such as a user updates their
+location. The Action methods are executed by the smart contract to take an action and the verifiers are methods that
+verify transaction state. By isolating these methods and their data dependencies, one can shard a smart contract to
+execute in pieces on different nodes on a blockchain thereby increasing efficiency and reducing the probability of a
+coordinated attack.
 
 Much like the other components, Latitude's smart contract sharding system shall leverage available algorithm libraries
 and tools for rapid and iterative development.
