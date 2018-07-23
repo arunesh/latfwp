@@ -21,13 +21,23 @@ technological innovations that will be built into it.
 
 \subsection{Architecture overview}
 
+The overall architecture of the Latitude Blockchain consists of a base blockchain and a side-chain for each application
+vertical. This choice of an architecture gives the maximum flexibility for each side-chain to use its own mechanisms
+while allowing for summaries or Merklized proofs of transactions to be commited to the base chain (or the main chain).
+
+
 \begin{itemize}
-    \item Explain the overall architecture.
+    \item Overall architecture.
     \item Side chains. Main chain.
-    \item how the chains interact.
-    \item How the cross-chain transactions are committed.
+    \item chains interact mechanism.
+    \item Cross-chain transactions are commitment protocol.
 
 \end{itemize}
+
+Implementation Note: For the alpha version of Latitude, it might be possible to use an existing chain with high
+transaction velocity and low cost, such as EOS, Neo, Zilliqa or Harmony as a drop-in replacement for the base chain
+functionality. In the long term, it might be beneficial to have our own base-chain with built in smart contract
+functions for transportation applications. This will also work better with Latitude's own token economics.
 
 \subsection{Base Blockchain layer}
 
@@ -292,11 +302,14 @@ coordinated attack.
 Much like the other components, Latitude's smart contract sharding system shall leverage available algorithm libraries
 and tools for rapid and iterative development.
 
-\subsection{Cryptoeconomics and Governance}
+\subsection{Token economics: The Latitude Token (LAT)}
 
-Crytpeconomics and governance refer to the incentive structure in the Latitude blockchain and the decentralized decision
-making structure. These discussions go hand-in-hand as they specify how the blockchain functions in a distributed and
-decentralized manner in the real world.
+Latitude has its own token for use on the Latitude Blockchain, called LAT. There would be a fixed token supply for a
+certain period of time (4 years). A certain percentage of the tokens are reserved for funding and other operations, the
+detials of which are not discussed in this document. The rest of the tokens will be available for the network for use.
+
+{\bf INSERT TOKEN PIE CHART}
+
 \newline
 \noindent
 {\bf Cryptoeconomics:}
@@ -317,9 +330,32 @@ Latitude shall employ a Proof of Stake model (delegated or non-delegated) for pa
 gained popularity among a notable number of blockchains \cite{dpos_steemit}. This also allows for deposit slashing as a
 technique to tackle Byzantine behavior. Latitude will employ techniques such as Minimal Slashing \cite{buterin_slashing}
 for Byzantine fault tolerance and safety under distributed asynchronous operation.
-\newline
+
 \noindent
-{\bf Governance:}
+{\bf User incentives:}
+Token economics allow for the creation of what we call user incentives. These are protocol constructs in the blockchain
+that allow users to benefit from the value they create for the ecosystem. Refer to \cite{token_ecos} for an overview on
+incentive mechanisms to reward users for various methods of participation in the network. In general, the Latitude token
+ecosystem will be based on market economics, that is, supply and demand from various participants will be the primary
+driver for prices and incentives in the network. This philosophy falls in line with decentralized control and operation
+while also allowing for creating most reward for honest behavior in the network.
+
+The ability of user incentives to exist in a decentralized manner can be disruptive to existing incumbents in the
+sharing economy space, such as Uber, Lyft, Airbnb, etc since users can get rewarded in a tangible manner for their
+contributions \cite{sharing_eco_bc}. Consumers shifted to apps in the sharing economy as they provided cheaper and
+better alternatives to traditional services like Uber and Airbnb. However, since all transactions go through these
+centralized providers, the platform owners determine the fees, percentages and are in complete control of any data
+practices and policies which cannot be verified. They often become accused of predatory behavior. Using blockchain based
+incentives, sharing and open-source software these problems can be addressed in a singular fashion.
+
+As an example, consider the Ridesharing application. As users contribute data on what rides they are taking, it becomes
+possible for the network to reward them with tokens. They could, upon sufficient contribution, redeem them for free
+rides or share with them others on the network. A similar model can be adopted for data concerning driver behavior where
+drivers using different apps and sensor algorithms can elect to share their data towards building a better driver score
+in return for suitable incentives.
+
+\subsection{Governance on Latitude}
+
 Governance refers to a decentralized manner in which decisions are made using a consensus mechanism on the blockchain.
 Decisions include basic constructs whether a node can join or leave the network. Or it can include key decisions on
 whether an upgrade should be mandated on every node, a given participant such as a data provider should be penalized. It
@@ -344,28 +380,6 @@ enforcement.
 % - Some council members can have restricted access.
 % - Eg: US govt can have voting rights on US data/users, etc.
 %
-\noindent
-{\bf User incentives:}
-Token economics allow for the creation of what we call user incentives. These are protocol constructs in the blockchain
-that allow users to benefit from the value they create for the ecosystem. Refer to \cite{token_ecos} for an overview on
-incentive mechanisms to reward users for various methods of participation in the network. In general, the Latitude token
-ecosystem will be based on market economics, that is, supply and demand from various participants will be the primary
-driver for prices and incentives in the network. This philosophy falls in line with decentralized control and operation
-while also allowing for creating most reward for honest behavior in the network.
-
-The ability of user incentives to exist in a decentralized manner can be disruptive to existing incumbents in the
-sharing economy space, such as Uber, Lyft, Airbnb, etc since users can get rewarded in a tangible manner for their
-contributions \cite{sharing_eco_bc}. Consumers shifted to apps in the sharing economy as they provided cheaper and
-better alternatives to traditional services like Uber and Airbnb. However, since all transactions go through these
-centralized providers, the platform owners determine the fees, percentages and are in complete control of any data
-practices and policies which cannot be verified. They often become accused of predatory behavior. Using blockchain based
-incentives, sharing and open-source software these problems can be addressed in a singular fashion.
-
-As an example, consider the Ridesharing application. As users contribute data on what rides they are taking, it becomes
-possible for the network to reward them with tokens. They could, upon sufficient contribution, redeem them for free
-rides or share with them others on the network. A similar model can be adopted for data concerning driver behavior where
-drivers using different apps and sensor algorithms can elect to share their data towards building a better driver score
-in return for suitable incentives.
 
 \begin{figure}[t]
     \centering
