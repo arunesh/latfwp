@@ -155,12 +155,29 @@ grow. Below, we present the core set of cryptographic proofs that are unique to 
 
 \subsubsection{Proof of Real-world Observation}
 
-The core concept behind these observations is the flow of trust. For example, if a GPS receiver returns a location, the
-amount of trust in that location result is proportional to the amount of trust in the receiver construction and the
-satellite system being used (such as Navstar, GNSS or others). Latitude uses this concept of trust as an internal metric
-to compute a proof of a real-world observation. A real-world observation could be a location computation, a ride from
-point A to B, a traffic observation or a landmark at a given location. Here we present the common algorithm used to
-compute these proofs which can be shared across the Latitude platform.
+The core concept behind these observations is the flow of trust. Any observation in the real world, be it a location or
+a landmark sighting is only as good as the trust placed in the method and apparatus used to compute it. For example, if
+a GPS receiver returns a location, the amount of trust in that location result is proportional to the amount of trust in
+the receiver construction and the satellite system being used (such as Navstar, GNSS or others). Latitude uses this
+concept of trust as an internal metric to compute a proof of a real-world observation. A real-world observation could be
+a location computation, a ride from point A to B, a traffic observation or a landmark at a given location. Here we
+present the common algorithm used to compute these proofs which can be shared across the Latitude platform.
+
+\noindent
+{\bf Definitions:}
+\begin{itemize}
+    \item Levels of trust $t_i, i \in \{0..M\}$, where $M$ is the max level of trust in the system. Trust level $t_{i+1} >
+        t_i$.
+    \item $t_0$ is the base level of trust assigned to any third party untrusted source of data.
+    \item $t_1$ is the trust assigned to a second party integration with Latitude's SDKs where the SDKs directly compute the
+        observation and report it to the system using second-party APIs. Examples include Apps in the trusted App stores
+        that integrate with Latitude.
+    \item $t_2$ is the trust assigned to a first-pary integration, such as a Latitude mobile app, or a first-party app
+        from trusted partners such as SherpaShare.
+    \item $t_{pf}$ is the minimum trust needed for a specific proof or obervation. Each proof type might have a
+        different requirment for this parameter. The computed proof also carries this parameters as an indication of
+        consensus or trust.
+\end{itemize}
 
 \begin{itemize}
     \item Each data source (such an an app installation, or a third-party source) is indentified using a certificate's
