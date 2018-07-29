@@ -107,7 +107,6 @@ contract system discussed later. They allow for verification of data existence o
 allow for the maintenance of a cryptographic log of all operations that happen on the network. These techniques are
 similar to the ones used by some of the other blockchains today \cite{buterin_merkle}.
 
-
 \subsubsection{Integrity and Access Control}
 
 Latitude uses standard and well understood cryptographic protocols to provide robust access control and maintain basic
@@ -115,8 +114,13 @@ integrity of transactions. Data integrity is maintained using digital signatures
 certificates. The blockchain ledgers are protected using a Merkle hash \cite{becker2008} as discussed in the previous
 section. A Merkle proof is used as a proof of transaction for cross-chain communication.
 
-Access contol for data that is not public or open can be managed using multi-party key communication protocol
-\cite{enigma, nucypher}.
+Access control for data that is not public or open, can be managed using multi-party key communication protocol (MPC)
+\cite{enigma, nucypher, mpc_survey}. MPC protocols work over a set of $N$ trusted participants or a consortium set. They
+can be designed to allow a minimum of $m<N$ participants to reach a consensus (using a off-chain protocol) in order to
+compute the key that would grant access. Using these primitives, it becomes possible to have granular access control,
+such as different amount of consensus for read, for writes and other semantic actions. Latitude shall make these
+mechanisms available to the app developer through platform APIs. As always, since this is an open system, it is possible
+for developers to build their own access control methods if they so wish.
 
 %Cryptographic primitives for:
 % - Security and privacy of data.
@@ -148,6 +152,34 @@ grow. Below, we present the core set of cryptographic proofs that are unique to 
   \caption{Examples of Geo-spatial queries that a spatial data-structure can support on the Latitude blockchain.}
     \label{fig:geo_spatial_query}
 \end{figure}
+
+\subsubsection{Proof of Real-world Observation}
+
+The core concept behind these observations is the flow of trust. For example, if a GPS receiver returns a location, the
+amount of trust in that location result is proportional to the amount of trust in the receiver construction and the
+satellite system being used (such as Navstar, GNSS or others). Latitude uses this concept of trust as an internal metric
+to compute a proof of a real-world observation. A real-world observation could be a location computation, a ride from
+point A to B, a traffic observation or a landmark at a given location. Here we present the common algorithm used to
+compute these proofs which can be shared across the Latitude platform.
+
+\begin{itemize}
+    \item Each data source (such an an app installation, or a third-party source) is indentified using a certificate's
+        public key. If this is a fully untrusted source that belongs to a third party, they start at the lowest level of
+        trust, denoted by $t_0$.
+\end{itemize}
+
+This is perhaps the most easily motivated functionality that the Latitude blockchain can provide. Proof of location is a
+cryptographic credential that proves that a given user, entity or participant is/was physically present at a given
+location at a specific time. The location could also be relative to another participant or landmark. The proof of
+location has been explored by other blockchains such as Platin \cite{platin}. Latitude shall provide the mobile, browser
+and sensor SDKs that can directly tie into the datastore to provide consensus based proofs. These proofs can unlock
+applications such as access to facilities or help increase trust in crowd-sourced mapping, traffic and incident reports.
+
+\subsubsection{Proof of Ride}
+\subsubsection{Proof of Landmark}
+\subsubsection{Proof of DriverScore}
+\subsubsection{Proof of Traffic}
+\subsubsection{Proof of Route}
 
  \begin{itemize}
      \item Proof of location: This is perhaps the most easily motivated functionality that the Latitude blockchain can
