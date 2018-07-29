@@ -25,7 +25,6 @@ The overall architecture of the Latitude Blockchain consists of a base blockchai
 vertical. This choice of an architecture gives the maximum flexibility for each side-chain to use its own mechanisms
 while allowing for summaries or Merklized proofs of transactions to be commited to the base chain (or the main chain).
 
-
 \begin{itemize}
     \item Overall architecture.
     \item Side chains. Main chain.
@@ -90,7 +89,10 @@ and other range queries, K-nearest neighbor searches, route optimization algorit
 % - Indexing road and driving data.
 % - Primitives for storing driving data for autonomous vehicles
 
-\subsection{Cryptographic primitives} \label{sec:crypto} Latitude makes use of state-of-the-art cryptographic protocols
+\subsection{Cryptography layer} \label{sec:crypto} Latitude makes use of state-of-the-art cryptographic protocols to
+provide various proofs, access control, confidentiality and other properties that are important in a decentralized
+system.
+
 such as AES encryption, secure hash functions, PKI certificates, multi-party key distribution protocols, proxy key
 re-encryption schemes, Elliptic-curve based Digital Signatures \cite{ecdsa}. They help provide strong security, privacy,
 access control, confidentiality and anonymity guarantees. Anonymity guarantees are an important part of data-sharing
@@ -105,6 +107,16 @@ contract system discussed later. They allow for verification of data existence o
 allow for the maintenance of a cryptographic log of all operations that happen on the network. These techniques are
 similar to the ones used by some of the other blockchains today \cite{buterin_merkle}.
 
+
+\subsubsection{Integrity and Access Control}
+
+Latitude uses standard and well understood cryptographic protocols to provide robust access control and maintain basic
+integrity of transactions. Data integrity is maintained using digital signatures. Every transaction is signed by one or more of the participants
+certificates. The blockchain ledgers are protected using a Merkle hash \cite{becker2008} as discussed in the previous
+section. A Merkle proof is used as a proof of transaction for cross-chain communication.
+
+Access contol for data that is not public or open can be managed using multi-party key communication protocol
+\cite{enigma, nucypher}.
 
 %Cryptographic primitives for:
 % - Security and privacy of data.
@@ -124,7 +136,6 @@ similar to the ones used by some of the other blockchains today \cite{buterin_me
 % - Proof of driver score 
 % - Open, trusted, understood driver score computation algorithms.
 % - Cryptographic proofs can be shared among entities, safely, securely.
-
 
 In addition to these standard primitives, Latitude provides a host of other proofs that are tailor made
 for geo-spatial, mapping, location and sensor data. These proofs can be used by applications, users and
