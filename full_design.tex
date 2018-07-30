@@ -308,7 +308,6 @@ base-level trust). As another example, Platin is a blockchain designed specifica
 of sensors and increase in trust over time falls in line with the general concept of proof of obervation (possibly with
 different trust constants).
 
-
 \subsubsection{Proof of Ride}
 
 Provides a proof that a particular user has taken a ride from point A to point B using a
@@ -317,11 +316,30 @@ be extended to include bus trips, flights, train rides and so on. The proof of r
 Latitude mobile SDK on various platforms. Using the mobile SDK to construct these proofs also adds to the amount of
 trust on the nature and parameters of the ride.  
 
+The proof of ride is computed using a time series of location updates. A Hidden Markov Model or other methods
+\cite{wu2011} can be used as "algorithmic observers or verifiers" of a location trace. The location trace can be
+supplanted with sensor data collected using a direct integration of the Latitude SDK. The sensor data should be in full
+correlation with the location trace and would consistute the evidence set $V$ for this proof.
+
+The proof of ride algorithm is the following:
+\begin{itemize}
+    \item Entity submits an evidence $V$ which includes a series of locations, or proof of locations and sensor data.
+    \item Platform can compute the trust as a function of trust inherent in included locatin proofs. Also, in certain
+        cases, it might be possible to have other observers to correlate the ride (such as passengers or drivers in a
+        rideshare scenario).
+    \item Algorithmic observers such as physical properties of the ride can also be used to add trust to the system.
+    \item Trusted observers: A small set of trusted observers, such as observers such as physical properties of the ride can also be used to add trust to the system.
+    \item Depending on how well the observations correlate, the computed final trust is used to compute a proof of ride.
+\end{itemize}
+
+Proof of ride can be
+
 \subsubsection{Proof of Landmark}
- This proves the existence of a particular landmark such as a monument, a
-         building, a sign post at a given lat/lng. This can also be used to prove the existence of a particular road or
-         the lack of. These proofs can be constructed using the proof of location combined with consensus among users.
-         This proof can become the backbone for verified mapping and landmark data-based applications.
+
+This proves the existence of a particular landmark such as a monument, a building, a
+sign post at a given lat/lng. This can also be used to prove the existence of a particular road or the lack of. These
+proofs can be constructed using the proof of location combined with consensus among users.  This proof can become the
+backbone for verified mapping and landmark data-based applications.
 
 \subsubsection{Proof of DriverScore}
 
