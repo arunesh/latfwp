@@ -200,6 +200,10 @@ the Latitude platform.
     \item Concurrence Weight: Each witness that concurs with an observation provides a {\em concurrence weight} which is
         the probability that they think the event happened. This is a value between 0 and 1. Denoted as $W_c(w, e, V)$,
         where the parameters are witness or observer $w$, entity $e$ and evidence $V$.
+    \item Location specific trust normalization factor $\gamma_L$. $\gamma$ for a location $L$ is a location specific
+        normalization factor which represents the average trust consensus in a specific location. For example, certain
+        areas might have a higher concentration or honest or dishonest nodes. Or certain methods of location
+        determination might have a bias that needs to be factored in.
 \end{itemize}
 
 Each proof is implemented as a special smart contract supported by the Latitude platform. The smart contract that
@@ -219,7 +223,8 @@ respective proof.
         to the proof.
     \item The proof computes the total trust in the observation $X$ as $T_{pf}(X, e, S)$, given by Equation
         \ref{eq_trust_compute}.
-    \item 
+    \item Trust normalization: The total trust in $T_{pf}(X, e, S)$ gets normalized by $\gamma_L$ where $L$ is a coarse
+        grained (city-level) location being considered. At bootstrap, a normalization factor of $1.0$ can be used.
 \end{enumerate}
 
 \noindent
@@ -227,6 +232,7 @@ Trust computation for a proof of observation X:
 \begin{equation*}
     \label{eq_trust_compute}
     T_{pf}(X, e, S) = \sum_{i\in S} T(p_i) * \NF(p_i, X) * W(p_i, X)
+    T_{pf}(X, e, S) = \gamma_L * T_{pf}(X, e, S)
 \end{equation*}
 
 where $T_{pf}(X, e, S)$ is the trust for the proof of observation $X$ proposed by entity $e$ and observed by
@@ -282,6 +288,7 @@ The proof of location uses the above framework for a real-world observations wit
     \item The witnesses or observers independently submit their recordings to the smart contract system, which either
         generates a valid proof or declines the request. At the end of each such operation, the new trust levels for
         various entities are computed.
+    \item Using the proof equation \ref{eq_trust_compute}, a trust level and proof is computed.
 \end{itemize}
 
 \noindent
