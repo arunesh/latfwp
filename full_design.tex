@@ -168,6 +168,8 @@ location result is proportional to the amount of trust in the receiver construct
 real-world observation.  Here we present the common algorithm used to compute these proofs which can be shared across
 the Latitude platform.
 
+\newcommand\NF{\mathit{Nf}}
+\newcommand\TM{\mathit{Tm}}
 \noindent
 {\bf Definitions:}
 \begin{itemize}
@@ -187,19 +189,23 @@ the Latitude platform.
     \item $tmin_{pf}$ is the minimum trust needed for a specific proof or obervation. Each proof type might have a
         different requirment for this parameter. The computed proof also carries this parameters as an indication of
         consensus or trust.
-    \item Trust map, $TM(e)$ gives the amount of trust recorded in the ledger for the entity $e$. The entity could be an
+    \item Trust map, $\TM(e)$ gives the amount of trust recorded in the ledger for the entity $e$. The entity could be an
         organization, an individual or a user (as identified by an app installation, for example).
     \item $N_{min}$ is the minimum number of entities that need to participate in the creation of this proof. This can
         be a function of the proof being created.
+    \item The entity requesting the proof, submits a request $R(e, t_b, V, \TM(e))$, where $R$ represents the proof
+        request. The request includes credentials for entity $e$, the base trust level in the request $t_b$, the
+        evidence of real-world observation (such as radio signal strength) $V$ and the existing entry in the trust
+        legder $\TM(e)$.
     \item Concurrence Weight: Each witness that concurs with an observation provides a {\em concurrence weight} which is
-        the probability that they think the event happened. This is a value between 0 and 1.
+        the probability that they think the event happened. This is a value between 0 and 1. Denoted as $W_c(w, e, V)$,
+        where the parameters are witness or observer $w$, entity $e$ and evidence $V$.
 \end{itemize}
 
 Each proof is implemented as a special smart contract supported by the Latitude platform. The smart contract that
 computed these proofs would provide a signed blob of data that certifies a certain observation as determined by the
 respective proof.
 
-\newcommand\NF{\mathit{Nf}}
 \noindent
 {\bf Algorithm for Proof of an observation $X$}:
 \begin{enumerate}
@@ -234,13 +240,18 @@ EWMA formula. Assuming entity $e$ gets its trust updated for a proof $p_e$:
     T(e)_{p_e} = (1 - \alpha) * T(e) + \alpha * T(p_e) / |S|
 \end{equation*}
 
-The goal of the above formula is twofold:
+The goal of the above formula is multi-fold:
 \begin{enumerate}
     \item To increase the average trust in an entity $e$ as a function of successful proofs. The larger the number of
         successful proofs, higher is the average trust in the entity.
     \item Similarly, the goal is also to reduce trust in case, with adequate participants, the system was unable to
         verify the claim. In fact, a larger draining of trust shall be instrumented if the system finds the claim to be
         demonstrably false.
+    \item Malicious behavior: If an observer or the entity consistently disagrees with others in the proof system,
+        over time their trust level will get degraded using a gradient method used in other reputation systems
+        \cite{sen2010}.
+    \item Rewarding honest behavior: Over time as observers and entities produce results with consistency, their
+        historicla reputation gets better and recorded in the trust ledger.
 \end{enumerate}
 
 \subsubsection{Proof of Location:}
@@ -252,6 +263,26 @@ location at a specific time. The location could also be relative to another part
 Latitude shall provide the mobile, browser and sensor SDKs that can directly tie into the datastore to provide consensus
 based proofs. These proofs can unlock applications such as access to facilities or help increase trust in crowd-sourced
 mapping, traffic and incident reports.
+
+The proof of location uses the above framework for a real-world observations with the following specification:
+\begin{itemize}
+    \item Entity $e$ computes a location on a mobile device. This could be an Android/iOS phone or a tablet/laptop.
+        Depending on how the entity uses Latitude's SDKs, the location computation starts with a base trust level of
+        $t_0$, $t_1$ or $t_2$.
+    \item As a part of the location proof request $R(e, t_b, \TM(e), V)$, the entity can submit any evidence $V$ that would help
+        prove the location. For example, on Android, this can include wifi-radio signals, cell tower signals, GPS
+        satellite location and timing signals, Bluetooth-LE scans, and other signals that can help prove the location.
+    \item Either the entity or the platform can find other participants for concurrence.
+    \item Concurrence: A participant can concur by confirming the observations included in the evidence $V$. This can
+        include, for example, a degree of concurrence or other factors that quantify how well they concur. The degree of
+        concurrence can be a function of the radio signal properties \cite{mishra_secure, Mathur_2011}. This is used to
+        compute the concurrence metric $W_c(w, e, v)$.
+    \item Depending on the trust level of the observer, or for other considerations, the normalization factor can be
+        used to boost or marginalize the contribution from a witness or observer $w$, denoted by $\NF(w, e, V)$.
+    \item The witnesses or observers independently submit their recordings to the smart contract system, which either
+        generates a valid proof or declines the request. At the end of each such operation, the new trust levels for
+        various entities are computed.
+\end{itemize}
 
 \noindent
 {\em Other proof of location chains:}
