@@ -227,11 +227,21 @@ where $T_{pf}(X, e, S)$ is the trust for the proof of observation $X$ proposed b
 participants $S$. A proof is considered valid if $T_{pf}(X, e, S) > tmin_{pf}(X)$, that is, the accumulated trust is
 above the minimum required for the type of observation $X$.
 
+\noindent
 Trust updates: Once a proof gets computed, the entity that initiated the observation gets its trust updated using an
 EWMA formula. Assuming entity $e$ gets its trust updated for a proof $p_e$:
 \begin{equation*}
     T(e)_{p_e} = (1 - \alpha) * T(e) + \alpha * T(p_e) / |S|
 \end{equation*}
+
+The goal of the above formula is twofold:
+\begin{enumerate}
+    \item To increase the average trust in an entity $e$ as a function of successful proofs. The larger the number of
+        successful proofs, higher is the average trust in the entity.
+    \item Similarly, the goal is also to reduce trust in case, with adequate participants, the system was unable to
+        verify the claim. In fact, a larger draining of trust shall be instrumented if the system finds the claim to be
+        demonstrably false.
+\end{enumerate}
 
 \subsubsection{Proof of Location:}
 
