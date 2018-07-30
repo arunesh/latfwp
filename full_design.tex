@@ -366,6 +366,14 @@ standard.
 
 A proof of DriverScore is computed as follows:
 \begin{itemize}
+    \item Driver score computation depends on the availability of open, trusted and benchmarked algorithms.
+    \item The sensor data can be made available on a decentralized database or can run locally on the phone via
+        integration with the Latitude SDK.
+    \item The observers include location time series data that pass through HMM models for validation. For example,
+        location and sensor data should make physical sense. Also they should be consistent with data from other
+        drivers in the area in temporal proximity. Other validation includes co-riders in a ridesharing scenario. 
+    \item Since this proof is very specific to each individual driver, it might take time for the system to be able to
+        create enough trust in a single driver data report.
 \end{itemize}
 
 \subsubsection{Proof of Traffic}
