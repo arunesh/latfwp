@@ -232,12 +232,19 @@ EWMA formula. Assuming entity $e$ gets its trust updated for a proof $p_e$:
     T(e)_{p_e} = (1 - \alpha) * T(e) + \alpha * T(p_e)
 \end{equation*}
 
+\subsubsection{Proof of Location:}
+
 This is perhaps the most easily motivated functionality that the Latitude blockchain can provide. Proof of location is a
 cryptographic credential that proves that a given user, entity or participant is/was physically present at a given
 location at a specific time. The location could also be relative to another participant or landmark. The proof of
 location has been explored by other blockchains such as Platin \cite{platin}. Latitude shall provide the mobile, browser
 and sensor SDKs that can directly tie into the datastore to provide consensus based proofs. These proofs can unlock
 applications such as access to facilities or help increase trust in crowd-sourced mapping, traffic and incident reports.
+
+The framework provided by Latitude is general enough to capture different implementations. For instance, \cite{foam}
+uses a trusted set of radio beacons or "anchors" to provide location signals. These essentially become highly trusted
+observers or participants in our framework as they are essentially first-party observers (with a large amount of
+base-level trust). 
 
 \subsubsection{Proof of Ride}
 \subsubsection{Proof of Landmark}
