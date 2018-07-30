@@ -288,8 +288,16 @@ The proof of location uses the above framework for a real-world observations wit
     \item The witnesses or observers independently submit their recordings to the smart contract system, which either
         generates a valid proof or declines the request. At the end of each such operation, the new trust levels for
         various entities are computed.
+    \item Historical Location: A past location proof from the same entity can be used as a "virtual observation" if the
+        location computation is in the recent past. This combined with reasonable laws of Physics or motion can provide
+        a small amount of trust for the current proof. For instance, if the entity was spotted at a grocery store about
+        5 minutes in the past, then any new location update that is within a few miles of the grocery store could be trusted.
     \item Using the proof equation \ref{eq_trust_compute}, a trust level and proof is computed.
 \end{itemize}
+
+The location proof and the corresponding data including trust parameters are recorded in a web-friendly format (such as
+JSON/XML) on a ledger specifically used for such proofs. The ledger entry can be used as a URL to refer to this proof
+for other applications that can be built on top of it.
 
 \noindent
 {\em Other proof of location chains:}
@@ -302,44 +310,41 @@ different trust constants).
 
 
 \subsubsection{Proof of Ride}
-\subsubsection{Proof of Landmark}
-\subsubsection{Proof of DriverScore}
-\subsubsection{Proof of Traffic}
-\subsubsection{Proof of Route}
 
- \begin{itemize}
-     \item Proof of location: This is perhaps the most easily motivated functionality that the Latitude blockchain can
-         provide. Proof of location is a cryptographic credential that proves that a given user, entity or participant
-         is/was physically present at a given location at a specific time. The location could also be relative to
-         another participant or landmark. The proof of location
-         has been explored by other blockchains such as Platin \cite{platin}. Latitude shall provide the mobile, browser
-         and sensor SDKs that can directly tie into the datastore to provide consensus based proofs. These proofs can
-         unlock applications such as access to facilities or help increase trust in crowd-sourced mapping, traffic and incident
-         reports.
-     \item Proof of ride: Provides a proof that a particular user has taken a ride from point A to point B using a
-         certain type of transport. This proof can be used across multi-modal ride platforms such as bike or car rides.
-         This can be extended to include bus trips, flights, train rides and so on. The proof of ride credential will be
-         available via the Latitude mobile SDK on various platforms. Using the mobile SDK to construct these proofs also
-         adds to the amount of trust on the nature and parameters of the ride.
-     \item Proof of landmark (mapping): This proves the existence of a particular landmark such as a monument, a
+Provides a proof that a particular user has taken a ride from point A to point B using a
+certain type of transport. This proof can be used across multi-modal ride platforms such as bike or car rides.  This can
+be extended to include bus trips, flights, train rides and so on. The proof of ride credential will be available via the
+Latitude mobile SDK on various platforms. Using the mobile SDK to construct these proofs also adds to the amount of
+trust on the nature and parameters of the ride.  
+
+\subsubsection{Proof of Landmark}
+ This proves the existence of a particular landmark such as a monument, a
          building, a sign post at a given lat/lng. This can also be used to prove the existence of a particular road or
          the lack of. These proofs can be constructed using the proof of location combined with consensus among users.
          This proof can become the backbone for verified mapping and landmark data-based applications.
-     \item Proof of driver score: This proof can be computed on the blockchain over the data aggregated on the
-         datastore. The algorithm itself shall be made available to the nodes either as an executable docker image or an
-         open-source version. This allows different nodes to run the computation and create a certificate of 
-         driver score which can then be attributed to the driver. This open framework can also allow different
-         driver score algorithms to co-exist in the system creating a community where better driver score algorithms can
-         be agreed upon and used as the industry standard.
-     \item Proof of traffic:  Similar to the driver score, traffic is also an algorithm that looks at the statistics of
-         location and speed data on roads. The proof is similarly computed through consensus and recorded as a
-         certificate on the blockchain. The proof could be about real-time traffic or historic traffic patterns which
-         can be shared with smart city applications, the Census Bureau or other regulatory bodies.
-     \item Proof of routes: Similar to the functionality in the popular Waze app, this is about whether there exists a
-         certain route (or a better route) from point A to point B. More the consensus, higher the trust. For example,
-         if a user actually takes the route from A to B and provides a proof of ride, that helps create the proof of its existence. This is useful
-         for trusted and verifiable mapping / routing applications.
- \end{itemize}
+
+\subsubsection{Proof of DriverScore}
+
+This proof can be computed on the blockchain over the data aggregated on the
+datastore. The algorithm itself shall be made available to the nodes either as an executable docker image or an
+open-source version. This allows different nodes to run the computation and create a certificate of driver score which
+can then be attributed to the driver. This open framework can also allow different driver score algorithms to co-exist
+in the system creating a community where better driver score algorithms can be agreed upon and used as the industry
+standard.
+
+\subsubsection{Proof of Traffic}
+
+Similar to the driver score, traffic is also an algorithm that looks at the statistics
+of location and speed data on roads. The proof is similarly computed through consensus and recorded as a certificate on
+the blockchain. The proof could be about real-time traffic or historic traffic patterns which can be shared with smart
+city applications, the Census Bureau or other regulatory bodies.
+
+\subsubsection{Proof of Route}
+
+Similar to the functionality in the popular Waze app, this is about whether there exists
+a certain route (or a better route) from point A to point B. More the consensus, higher the trust. For example, if a
+user actually takes the route from A to B and provides a proof of ride, that helps create the proof of its existence.
+This is useful for trusted and verifiable mapping / routing applications.
 
 \subsection{Latitude Smart Contract system}
 
