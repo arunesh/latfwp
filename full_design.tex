@@ -174,12 +174,17 @@ the Latitude platform.
     \item Levels of trust $t_i, i \in \{0..M\}$, where $M$ is the max level of trust in the system. Trust level $t_{i+1} >
         t_i$.
     \item $t_0$ is the base level of trust assigned to any third party untrusted source of data.
+
+    \item Each data source (such an an app installation, or a third-party source) is indentified using a certificate's
+        public key. If this is a fully untrusted source that belongs to a third party, they start at the lowest level of
+        trust $t_0$.
+
     \item $t_1$ is the trust assigned to a second party integration with Latitude's SDKs where the SDKs directly compute the
         observation and report it to the system using second-party APIs. Examples include Apps in the trusted App stores
         that integrate with Latitude.
     \item $t_2$ is the trust assigned to a first-pary integration, such as a Latitude mobile app, or a first-party app
         from trusted partners such as SherpaShare.
-    \item $t_{pf}$ is the minimum trust needed for a specific proof or obervation. Each proof type might have a
+    \item $tmin_{pf}$ is the minimum trust needed for a specific proof or obervation. Each proof type might have a
         different requirment for this parameter. The computed proof also carries this parameters as an indication of
         consensus or trust.
     \item Trust map, $TM(e)$ gives the amount of trust recorded in the ledger for the entity $e$. The entity could be an
@@ -203,10 +208,23 @@ respective proof.
         $W(p_i, X) \in [0,1]$ depending on how well they concur with the observation.
     \item Normalization factor $Nf(p_i, X)$: This is a multiplier, usually greater than 1, that signifies the
         amplification in trust as a funciton of how the observation was concurred upon. 
-    \item Each observer $p_i \in S$, provides a normalization factor $NF(p_i, X)$ and a concurrence weight $W(p_i, X)$
+    \item Each observer $p_i \in S$, provides a normalization factor $Nf(p_i, X)$ and a concurrence weight $W(p_i, X)$
         to the proof.
-    \item The proof computes the total trust in the observation $X$. 
+    \item The proof computes the total trust in the observation $X$ as $T_{pf}(X, e, S)$, given by Equation
+        \ref{eq_trust_compute}.
+    \item 
 \end{enumerate}
+
+\noindent
+Trust computation for a proof of observation X:
+\begin{equation*}
+    \label{eq_trust_compute}
+    T_{pf}(X, e, S) = \sum_{i\in S} T(p_i) * Nf(p_i, X) * W(p_i, X)
+\end{equation*}
+
+where $T_{pf}(X, e, S)$ is the trust for the proof of observation $X$ proposed by entity $e$ and observed by
+participants $S$. A proof is considered valid if $T_{pf}(X, e, S) > tmin_{pf}(X)$, that is, the accumulated trust is
+above the minimum required for the type of observation $X$.
 
 Trust updates: Once a proof gets computed, the entity that initiated the observation gets its trust updated using an
 EWMA formula. Assuming entity $e$ gets its trust updated for a proof $p_e$:
@@ -215,10 +233,7 @@ EWMA formula. Assuming entity $e$ gets its trust updated for a proof $p_e$:
 \end{equation*}
 
 \begin{itemize}
-    \item Each data source (such an an app installation, or a third-party source) is indentified using a certificate's
-        public key. If this is a fully untrusted source that belongs to a third party, they start at the lowest level of
-        trust, denoted by $t_0$.
-\end{itemize}
+ \end{itemize}
 
 This is perhaps the most easily motivated functionality that the Latitude blockchain can provide. Proof of location is a
 cryptographic credential that proves that a given user, entity or participant is/was physically present at a given
