@@ -188,7 +188,16 @@ the Latitude platform.
         be a function of the proof being created.
 \end{itemize}
 
-Each proof can be implemented as a special smart contract supported by the Latitude platform.
+Each proof is implemented as a special smart contract supported by the Latitude platform. The smart contract that
+computed these proofs would provide a signed blob of data that certifies a certain observation as determined by the
+respective proof.
+
+Trust updates: Once a proof gets computed, the entity that initiated the observation gets its trust updated using an
+EWMA formula. Assuming entity $e$ gets its trust updated for a proof $p_e$:
+\begin{equation*}
+    T(e)_{p_e} = (1 - \alpha) * T(e) + \alpha * T(p_e)
+\end{equation*}
+
 \begin{itemize}
     \item Each data source (such an an app installation, or a third-party source) is indentified using a certificate's
         public key. If this is a fully untrusted source that belongs to a third party, they start at the lowest level of
