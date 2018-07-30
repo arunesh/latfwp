@@ -186,11 +186,27 @@ the Latitude platform.
         organization, an individual or a user (as identified by an app installation, for example).
     \item $N_{min}$ is the minimum number of entities that need to participate in the creation of this proof. This can
         be a function of the proof being created.
+    \item Concurrence Weight: Each witness that concurs with an observation provides a {\em concurrence weight} which is
+        the probability that they think the event happened. This is a value between 0 and 1.
 \end{itemize}
 
 Each proof is implemented as a special smart contract supported by the Latitude platform. The smart contract that
 computed these proofs would provide a signed blob of data that certifies a certain observation as determined by the
 respective proof.
+
+\noindent
+{\bf Algorithm for Proof of an observation $X$}:
+\begin{enumerate}
+    \item Suppose $e$ is the entity that initiates a request for proof of an obervation $X$ made by $e$.
+    \item The proof system finds a subset (possibly randomly sampled) of participants $S$ who are able
+        to {\it concur} with the obervation $X$. Each participant, $p_i \in S$, assigns a {\em concurrence} weight
+        $W(p_i, X) \in [0,1]$ depending on how well they concur with the observation.
+    \item Normalization factor $Nf(p_i, X)$: This is a multiplier, usually greater than 1, that signifies the
+        amplification in trust as a funciton of how the observation was concurred upon. 
+    \item Each observer $p_i \in S$, provides a normalization factor $NF(p_i, X)$ and a concurrence weight $W(p_i, X)$
+        to the proof.
+    \item The proof computes the total trust in the observation $X$. 
+\end{enumerate}
 
 Trust updates: Once a proof gets computed, the entity that initiated the observation gets its trust updated using an
 EWMA formula. Assuming entity $e$ gets its trust updated for a proof $p_e$:
