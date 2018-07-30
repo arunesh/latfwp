@@ -328,18 +328,32 @@ The proof of ride algorithm is the following:
         cases, it might be possible to have other observers to correlate the ride (such as passengers or drivers in a
         rideshare scenario).
     \item Algorithmic observers such as physical properties of the ride can also be used to add trust to the system.
-    \item Trusted observers: A small set of trusted observers, such as observers such as physical properties of the ride can also be used to add trust to the system.
+    \item Trusted observers: A small set of trusted observers such as API-based verification from Rideshare systems like
+        Uber, Lyft and others can also be used as verifiers or concurrence providers to augment the proof.
     \item Depending on how well the observations correlate, the computed final trust is used to compute a proof of ride.
 \end{itemize}
 
-Proof of ride can be
+Proof of ride becomes a blob of signed data which gets recorded on the ledger.
 
 \subsubsection{Proof of Landmark}
 
-This proves the existence of a particular landmark such as a monument, a building, a
-sign post at a given lat/lng. This can also be used to prove the existence of a particular road or the lack of. These
-proofs can be constructed using the proof of location combined with consensus among users.  This proof can become the
-backbone for verified mapping and landmark data-based applications.
+This proves the existence of a particular landmark such as a monument, a building, a sign post at a given lat/lng. This
+can also be used to prove the existence of a particular road or the lack of. These proofs can be constructed using the
+proof of location combined with consensus among users.  This proof can become the backbone for verified mapping and
+landmark data-based applications.
+
+The proof of landmark works as follows:
+
+\begin{itemize}
+    \item Multiple observers send evidence for a landmark. Evidence can include GPS-tagged photos or other sensor data
+        (including 3D data of the area) using Latitude-integrated apps.
+    \item Any observer or entity can request the proof. It might also
+        be possible for the system to create a proof automatically based on sufficient collection of evidence.
+    \item Based on the strength of individual observations, a smart contract can create such proofs.
+\end{itemize}
+
+The proof of landmark can be used for mapping and other applications in the Geo-spatial location and mapping industry.
+These proofs can be stored on the ledger and in a spatial database which can make for efficient querying.
 
 \subsubsection{Proof of DriverScore}
 
@@ -350,6 +364,10 @@ can then be attributed to the driver. This open framework can also allow differe
 in the system creating a community where better driver score algorithms can be agreed upon and used as the industry
 standard.
 
+A proof of DriverScore is computed as follows:
+\begin{itemize}
+\end{itemize}
+
 \subsubsection{Proof of Traffic}
 
 Similar to the driver score, traffic is also an algorithm that looks at the statistics
@@ -357,12 +375,23 @@ of location and speed data on roads. The proof is similarly computed through con
 the blockchain. The proof could be about real-time traffic or historic traffic patterns which can be shared with smart
 city applications, the Census Bureau or other regulatory bodies.
 
+Proof of traffic is computed as follows:
+
+\begin{itemize}
+\end{itemize}
+
 \subsubsection{Proof of Route}
 
 Similar to the functionality in the popular Waze app, this is about whether there exists
 a certain route (or a better route) from point A to point B. More the consensus, higher the trust. For example, if a
 user actually takes the route from A to B and provides a proof of ride, that helps create the proof of its existence.
 This is useful for trusted and verifiable mapping / routing applications.
+
+Proof of Route is computed as follows:
+
+\begin{itemize}
+\end{itemize}
+
 
 \subsection{Latitude Smart Contract system}
 
