@@ -199,6 +199,7 @@ Each proof is implemented as a special smart contract supported by the Latitude 
 computed these proofs would provide a signed blob of data that certifies a certain observation as determined by the
 respective proof.
 
+\newcommand\NF{\mathit{Nf}}
 \noindent
 {\bf Algorithm for Proof of an observation $X$}:
 \begin{enumerate}
@@ -206,9 +207,9 @@ respective proof.
     \item The proof system finds a subset (possibly randomly sampled) of participants $S$ who are able
         to {\it concur} with the obervation $X$. Each participant, $p_i \in S$, assigns a {\em concurrence} weight
         $W(p_i, X) \in [0,1]$ depending on how well they concur with the observation.
-    \item Normalization factor $Nf(p_i, X)$: This is a multiplier, usually greater than 1, that signifies the
+    \item Normalization factor $\NF(p_i, X)$: This is a multiplier, usually greater than 1, that signifies the
         amplification in trust as a funciton of how the observation was concurred upon. 
-    \item Each observer $p_i \in S$, provides a normalization factor $Nf(p_i, X)$ and a concurrence weight $W(p_i, X)$
+    \item Each observer $p_i \in S$, provides a normalization factor $\NF(p_i, X)$ and a concurrence weight $W(p_i, X)$
         to the proof.
     \item The proof computes the total trust in the observation $X$ as $T_{pf}(X, e, S)$, given by Equation
         \ref{eq_trust_compute}.
@@ -219,7 +220,7 @@ respective proof.
 Trust computation for a proof of observation X:
 \begin{equation*}
     \label{eq_trust_compute}
-    T_{pf}(X, e, S) = \sum_{i\in S} T(p_i) * Nf(p_i, X) * W(p_i, X)
+    T_{pf}(X, e, S) = \sum_{i\in S} T(p_i) * \NF(p_i, X) * W(p_i, X)
 \end{equation*}
 
 where $T_{pf}(X, e, S)$ is the trust for the proof of observation $X$ proposed by entity $e$ and observed by
@@ -229,7 +230,7 @@ above the minimum required for the type of observation $X$.
 Trust updates: Once a proof gets computed, the entity that initiated the observation gets its trust updated using an
 EWMA formula. Assuming entity $e$ gets its trust updated for a proof $p_e$:
 \begin{equation*}
-    T(e)_{p_e} = (1 - \alpha) * T(e) + \alpha * T(p_e)
+    T(e)_{p_e} = (1 - \alpha) * T(e) + \alpha * T(p_e) / |S|
 \end{equation*}
 
 \subsubsection{Proof of Location:}
