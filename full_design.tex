@@ -378,6 +378,16 @@ city applications, the Census Bureau or other regulatory bodies.
 Proof of traffic is computed as follows:
 
 \begin{itemize}
+    \item The traffic evidence consists of a location series including sensor data that can compute velocity,
+        acceleration and other parameters. Usually a GPS location also includes a velocity vector.
+    \item Proof of traffic can be computed by the system automatically upon gathering sufficient evidence from
+        potentially unrelated observers or participants.
+    \item Algorithmic verifiers will play a central role here as they are able to validate the traffic using time series
+        location data, velocity vectors and correlation from multiple observers.
+    \item Incident data which includes traffic incidents, constructions and other such events also can be part of this
+        proof system and help augment the trusted in this proof.
+    \item This is similar to a centralized traffic system such as one provided by Waze (or Google maps), except it is
+        open, fully decentralized with the data available for any interested party to access.
 \end{itemize}
 
 \subsubsection{Proof of Route}
@@ -390,8 +400,18 @@ This is useful for trusted and verifiable mapping / routing applications.
 Proof of Route is computed as follows:
 
 \begin{itemize}
+    \item Just like a proof of ride, a proof of route consists of multiple location points in a time series.
+    \item An algorithmic verifier, such as a HMM model could add to the validity of the route.
+    \item Other observers could include participants who have also taken the same route at a recent times. These need
+        not be ridesharing passengers.
+    \item The Latitude platform, or an entity could propose a proof which can be executed upon sufficiently collected
+        trusted evidence.
 \end{itemize}
 
+Proof of route can solve problems in mapping where the locals have the most up-to-date information on the routes, but
+there is also an issue of trust. Major map providers such as Navstar, Google and others have way to crowdsource such
+information with a reputation system in place to tackle malicious intent. Latitude's proof of route can solve this
+problem to help provide reliable data for mapping applications.
 
 \subsection{Latitude Smart Contract system}
 
