@@ -1,29 +1,32 @@
 \begin{figure}[t]
     \centering
-    \includegraphics[width=1.00\textwidth]{latarch.png}
+    \includegraphics[width=1.00\textwidth]{lat-arch-2.png}
   \caption{Architecture of the Latitude Blockchain and associated platform ecosystem.}
     \label{fig:lat-arch}
 \end{figure}
 
-\section{The Latitude Blockchain}\label{sec:design}
+\section{The Latitude Platform}\label{sec:design}
 
-In this Section, we present a high-level design of the Latitude blockchain. The full-version of this whitepaper shall
-contain a very detailed design of each component. We start with an overview of the key design principles that will guide
-the rest of the design for the Latitude Blockchain. Its important to note here that for implementation purposes, it
-might be possible to use an existing core blockchain for the underlying functionalities and build Latitude as a layer on
-top. We shall make these determinations in the full-version of the whitepaper.
+In this Section, we present a high-level design of the Latitude platform.  We start with an overview of the key design
+principles that will guide the rest of the design for Latitude. Its important to note here that for implementation
+purposes, it might be possible to use an existing core blockchain for the underlying functionalities and build Latitude
+as a layer on top.
 
-The purpose of the Latitude blockchain is to become the best platform in the world for decentralized applications for
-the Transportation Industry. Specifically, this boils down to constructs in the blockchain that can handle spatial,
-mapping, traffic, driving data including data relating to other modalities of transport (bike sharing, walking, even air
-routes later on). Figure \ref{fig:lat-arch} presents the architecture of the Latitude blockchain in terms of the core
-technological innovations that will be built into it.
+The purpose of the Latitude platform is to become the best blockchain-based ecosystem in the world for decentralized
+applications for the Transportation Industry. Specifically, this boils down to constructs in the blockchain that can
+handle spatial, mapping, traffic, driving data including data relating to other modalities of transport (bike sharing,
+walking, even air routes later on). Figure \ref{fig:lat-arch} presents the architecture of the Latitude blockchain in
+terms of the core technological innovations that will be built into it.
 
 \subsection{Architecture overview}
 
-The overall architecture of the Latitude Blockchain consists of a base blockchain and a side-chain for each application
-vertical. This choice of an architecture gives the maximum flexibility for each side-chain to use its own mechanisms
-while allowing for summaries or Merklized proofs of transactions to be commited to the base chain (or the main chain).
+The overall architecture of the Latitude Blockchain consists of a base blockchain and a protocol implementation (Dapp
+SDK and smart contract APIs) for each application vertical. This choice of an architecture gives the maximum flexibility
+for each application vertical to use its own protocol mechanisms for token incentives while allowing for summaries or
+Merklized proofs of transactions to be commited to the base chain. In the first (few) version of Latitude, the base
+chain might be an existing blockchain such as Ethereum, EOS, Zilliqa or Neo. Eventually Latitude might move to a
+specialized design of a blockchain that works well for Transportation data and dapps. The specific mechanisms for each
+business vertical shall be discussed in Section \ref{sec:apps}.
 
 \begin{itemize}
     \item Overall architecture.
@@ -42,26 +45,30 @@ transaction velocity and low cost, such as EOS, Neo, Zilliqa or Harmony as a dro
 functionality. In the long term, it might be beneficial to have our own base-chain with built in smart contract
 functions for transportation applications. This will also work better with Latitude's own token economics.
 
-\subsection{Base Blockchain layer}
+\noindent
+{\em Base Blockchain layer:}
 
-Blocks, proof of stake, transaction velocity.
+The Latitude platform uses a base blockchain layer for Layer-0 operations as shown in Figure \ref{fig:lat-arch}. The
+base layer can be an existing blockchain so that the Latitude essentially provides middleware for layer 2 and 3
+operations. This design shall be sufficient for the first few versions of Latitude. Long term we shall migrate to our
+own base blockchain to help scale operations that work better for the Latitude dapps.
 
-Delegated proof of stake system where a set of "delegates" are used. The delegates are "promoted" based on time-based
-trust or stake (or a combination of these). This design is similar to the Cosmos blockchain and differs from other dPOS
-system such as EOS.
+Delegated Proof of Stake (DPOS) is the fastest, efficient and decentralized consensus model available today. DPOS
+leverages the power of stakeholder approval voting to resolve consensus issues in a fair and democratic way. All network
+parameters, from fee schedules to block intervals and transaction sizes, can be tuned via elected delegates.
+Deterministic selection of block producers shows that transactions can be confirmed in an average of less than a second
+\cite{eos_producers}. This speed is important for scaling the Latitude chain.
 
-The Delegated Proof of Stake (dPOS) takes the best of both cooperative and competitive consensus algorithms. DPoS uses
-votes from stakeholders to achieve consensus. The competitive part is larger stakeholders having an influence on their
-delegate of choice. In Latitude, it is also possible to gain a larger stake by accruing what we call "trust" through
-honest operation over a period of time. The delegates that have the most votes will take their turn to produce a block
-cooperatively in a sequence. DPoS is also scalable because anyone can participate in the consensus. Additionally, DPoS
-is environmentally friendly because electricity isn’t wasted like in Proof of Work.
-
-Implementation using Tendermint or plasma chains. Only Merkle proof is
-committed. There can be any number of side-chains. But side-chains would correspond to one of the application platforms
-described later.
-
-PBFT for consensus on high volume side-chain commitments.
+Latitude's Delegated proof of stake system uses a set of "delegates" for voting on a block producer. The delegates are
+"promoted" based on time-based trust or stake (or a combination of these). This design is similar to the Cosmos
+blockchain and differs from other dPOS system such as EOS. The exact number of delegates can be a tunable parameter that
+can be changed by the governing council of nodes. This version of takes the best of both cooperative and competitive
+consensus algorithms.  The competitive part is larger stakeholders having an influence on their delegate of choice. In
+Latitude, it is also possible to gain a larger stake by accruing what we call "trust" through honest operation over a
+period of time. The delegates that have the most votes will take their turn to produce a block cooperatively in a
+sequence. A $2/3$ majority of consensus among the delegates over the {\em last minted block} is needed to achieve
+consensus and mint a new block onto the chain. Further discussion on Governance and other paremeters of a custom
+Blockchain design are discussed in Appendix \ref{app:latchain}.
 
 \subsection{Spatial datastore}
 One of the central aspects of the Latitude blockchain is a geo-spatial datastore that fundamentally understands various
