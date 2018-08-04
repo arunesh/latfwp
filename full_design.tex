@@ -573,34 +573,56 @@ and tools for rapid and iterative development.
 
 Latitude has its own token for use on the Latitude Blockchain, called LAT. There would be a fixed token supply for a
 certain period of time (4 years). A certain percentage of the tokens are reserved for funding and other operations, the
-detials of which are not discussed in this document. The rest of the tokens will be available for the network. 
+detials of which are not discussed in this document. The rest of the tokens will be available for the network. In this
+Section, we discuss the Cryptoeconomics part of Latitude which creates the right incentive structure for various
+participants.  For an overview of Cryptoeconomics in the blockchain space, please see \cite{sinclair_crypto}.
 
 We shall use the work token model \cite{work_token}, where a certain number of tokens are pre-mind and ready for use.
 The rest of the tokens can follow a transaction fee model, where the "miners" earn a certain fee for mining or minting
 a block as per the consensus protocol. Out of 100\% tokens available for network operations, we shall have 70\%
 pre-mined for network use and 30\% for block miners as rewards. The pre-mined tokens shall be used to subsidize network
-resources, reward an intial set of users for onboarding and fund developer communities, etc.
+resources, onboard the early adopters, fund developer communities, bug bounty programs and related activities.
 
-\newline
-\noindent
-{\bf Cryptoeconomics:}
-Cryptoeconomics refers to the mechanics of the protocol underlying the blockchain operations which creates incentives
-for the various stake-holders. For example, in the Latitude Blockchain it is possible to reward users for sharing their data
-for certain purposes. For example, users can be rewarded if they share traffic data or accident information or better
-routes. This is similar to the Waze model but creates legitimate rewards for users that have meaningful value outside
-the Waze application. For an overview of Cryptoeconomics in the blockchain space, please see \cite{sinclair_crypto}.
+The participants in Latitude are of the following types:
+\begin{itemize}
+    \item Miners: Anybody can "mine" the LAT token by contributin resources, such as disk, network and computing. This
+        is similar to most other blockchains, which also allows Latitude to be built as a layer 1-3 stack on other
+        chains for the first few versions. The miners earn transaction fees and token rewards for mining a block. The
+        consensus protocol is dPOS as discussed in the earlier Section.
+    \item Users: Users who contribute data can be rewarded using the LAT token. They usually contribute using a partner
+        app such as a Ridesharing app. They can subsequently convert the token into other uses on the platform or into
+        fiat.
+    \item Data providers: These could be institutions that transact on Latitude to provide transportation data. The data
+        could be modified to reduce any privacy loss and could purely be sensor or raw mapping/location data. The
+        availability of proof of X would increase the trust in the validity of the data.
+    \item Data consumers: These are participants such as insurance companies or ad-networks who can consume
+        transportation data. They could consumer real-time data, such as real time ride sharing information for a
+        certain city. Or it could be aggregate data for deep learning algorithms.
+    \item Dapp developers: These are developers who build apps on the Latitude platform. They would purchase data,
+        capacity or other features of the platform on a per-transaction basis. Deep discounts and other incentives can
+        be used to seed this community.
+    \item Regulators: These are government agencies who implement policies on the transactions in any given industry.
+        They can use the LAT token to implement and execute such policies as code on the platform. They can also
+        institute fines using the token or create incentives structures for honest players.
+\end{itemize}
 
-The core building block of the Cryptoeconomics in Latitude is the Latitude Token, or LAT. This will be transacted in
-each and every micro-transaction that takes place on the blockchain to create the right incentives, enforce smart
-contracts and penalize Byzantine behavior. One of the fundamental design principles behind the protocol for the LAT
-token is to create incentives assuming nodes are greedy and are interested in maximizing their gain. We will also build
-safeguards against reasonable amount of collusion among nodes to subvert the system. The design is crafted such that the
-best way for a node to maximize its revenue would be to participate with full honesty.
+The salient features of the Latitude token economics are the following:
+\begin{itemize}
+    \item Assume greedy but honest participation: The miners are incentivized to produce blocks through honest operation
+        using the dPOS consensus mechanism.
+    \item Users and data providers are rewarded for contribution of data. The actual reward and verification happens
+        through smart contracts. For example, in a Waze-like application, users are rewarded for posting accurate
+        traffic incident information.
+    \item Data sharing for deep learning, such as computing driving score or other mechanisms gets incentivized using
+        the token.
+    \item Deposit draining: Stake and deposit are drained if malicious operation is suspected. This is implemented using
+        smart contracts for any data sharing. This technique is also used for dPOS consensus operations.
+\end{itemize}
 
-Latitude shall employ a Proof of Stake model (delegated or non-delegated) for participation and core node-level mining. This mechanism has recently
-gained popularity among a notable number of blockchains \cite{dpos_steemit}. This also allows for deposit slashing as a
-technique to tackle Byzantine behavior. Latitude will employ techniques such as Minimal Slashing \cite{buterin_slashing}
-for Byzantine fault tolerance and safety under distributed asynchronous operation.
+%Latitude shall employ a Proof of Stake model (delegated or non-delegated) for participation and core node-level mining. This mechanism has recently
+%gained popularity among a notable number of blockchains \cite{dpos_steemit}. This also allows for deposit slashing as a
+%technique to tackle Byzantine behavior. Latitude will employ techniques such as Minimal Slashing \cite{buterin_slashing}
+%for Byzantine fault tolerance and safety under distributed asynchronous operation.
 
 \noindent
 {\bf User incentives:}
