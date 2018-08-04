@@ -1,15 +1,18 @@
-\section{Application Sidechains}
+\section{Application Protocol Middleware}
 \label{sec:apps}
 
 In this section, we discuss the four different classes of applications that can be built on the Latitude platform. Each
 of these applications is supported by a suite of software modules, smart contract add-ons and SDKs (mobile and desktop)
 that utilize the core functionality offered by Latitude and provision it in unique ways to suit the specific class of
-applications. Each application is a side-chain that posts its aggregated transactions to the main-chain if needed.
-The Latitude platform is extensible in the sense that its not limited to these four classes of
-application side-chains. For example, its possible to add additional applications such as for the shipping or the airline industry
-as verticals on the platform. Next we discuss each of these applications and how they can be supported on the platform.
+applications. In the first few versions, these applications are supported by a middleware layer as shown in Figure
+\ref{fig:lat-arch}. As Latitude grows, we shall be able to scale by moving to a side-chain architecture, details of
+which are discussed in Appendix \ref{app:latchain}.
 
-\subsection{Ride-share application side-chain}
+The Latitude platform is extensible in the sense that its not limited to these four classes of application layers. For
+example, its possible to add additional applications such as for the shipping or the airline industry as verticals on
+the platform. Next we discuss each of these applications and how they can be supported on the platform.
+
+\subsection{Ride-share application layer}
 
 Ride-sharing applications are the pinnacle of the applications in the data sharing economy. They empower the user to
 choose from a multi-modal ways of finding or providing rides. Latitude can provide the decentralized infrastructure to
