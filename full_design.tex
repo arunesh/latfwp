@@ -132,12 +132,12 @@ using an half-life based formula shown below. This is to ensure that the trust v
 The half-life value is a controllable parameter which indicates the duration after which the trust gets halved.
 \begin{equation*}
     \label{eq_trust_decay}
-    N(t) = N_0 (1/2)^(  t / t_{1/2))
+    N(t) = N_0 \bigg(\frac{1}{2}\bigg)^\frac{t}{t_{1/2}}
 \end{equation*}
 where 
 \begin{itemize}
     \item $N(t)$: The amount of trust at time $t$.
-    \item $N_0)$: The amount of initial trust before decay.
+    \item $N_0$: The amount of initial trust before decay.
     \item $t_{1/2}$: Half-life of the trust decay model.
 \end{itemize}
 
