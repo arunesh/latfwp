@@ -5,7 +5,12 @@
 Latitude uses the Delegated Proof of Stake algorithm for consensus. This method allows honest participants and stake
 holders to partake in block production. The same philosophy is also used for electing the Governance council. All
 operations are transparent and any participant can become part of such operations through honest commitment to the
-system. DPOS or variants thereof is being widely used in the blockchain space, current blockchains utilizing DPoS include:
+system.
+
+Like other PoS chains, DPoS doesn’t include miners who run hashes to produce blocks . Instead, an elected subset of
+participants is chosen to perform the work of validating the chain. These participants are called block producers,
+delegates, notaries, validators, forgers, or witnesses. DPOS or variants thereof is being widely used in the blockchain
+space, current blockchains utilizing DPoS include:
 
 \begin{itemize}
 \item EOS, BitShares, Steem, Golos, Ark, Lisk, PeerPlays, Nano (formerly Raiblocks), and Tezos
@@ -31,6 +36,19 @@ discussed in Section \ref{sec:trust}. The block production algorithm works as fo
 \item Block production time: This can be set to a desirable value, such as 0.5 or 1 second to make it periodic.
 \end{itemize}
 
+DPoS doesn’t attempt to “find” a balance between the number of block producers needed to ensure that control is
+sufficiently decentralized and the number of block producers that can easily be monitored for bad behavior. Rather, it
+explicitly sets the balance, though it can be modified later through governance protocols.
+
+\noindent
+{\em Rewards for block production:} While some blockchains such as EOS, purely reward block producers through inflationary
+economics, Latitude uses a combination of trasaction rewards and inflation. The rewards allow nodes that demonstrate
+trust (and less stake) to earn tokens. The exact distribution of reward vs inflation based earnings shall be determined
+via experiments and research on the testnet.
+
+\noindent
+{\em Scalability of the consensus algorithm:}
+
 \newpage
 \section{Scaling the Latitude Architecture}
 \label{app:latchain}
@@ -38,3 +56,22 @@ discussed in Section \ref{sec:trust}. The block production algorithm works as fo
 As the Latitude platform grows both in terms of aggregate data/users or partners, it might become necessary to split
 each application vertical into its own side-chain. A Latitude base-chain will work with various side-chains to enforce
 basic platform rules such as governance, token pricing, platfrom-wide smart contracts, etc.  
+
+Each side-chain is essentially its own blockchain with merkle summaries being committed to the main chain. This
+side-chain architecture can be used to accomplish the following:
+
+\begin{itemize}
+  \item Side-chain specific Governance: It becomes possible to divide governance into application specific rules on
+        each side-chain. For example, a ride-sharing side-chain could include governance rules specific for ride
+        providers and consumers. In a Telematics side-chain, the governance could include rules on how new driver
+        behavior algorithms are benchmarked, etc.
+  \item Scaling operations: Side-chains allow Latitude to scale operations by only committing chain-wide state changes
+      to the main-chain. These include account balances, core council or trust operations to be committed to the main
+        chain, allowing all other application specific transactions to stay limited to each side-chain.
+  \item Permissioned or Enterprise side-chains: Side-chain architecture also allows Latitude to offer a permissioned,
+      consortium or enterprise version. This looks more like a standard SaaS model where a set of companies can lease
+        service space on the Latitude chain for their consortium operations.
+\end{itemize}
+
+\subsection{Side-chain mining:}
+
