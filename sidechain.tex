@@ -46,8 +46,15 @@ economics, Latitude uses a combination of trasaction rewards and inflation. The 
 trust (and less stake) to earn tokens. The exact distribution of reward vs inflation based earnings shall be determined
 via experiments and research on the testnet.
 
-\noindent
-{\em Scalability of the consensus algorithm:}
+\noindent {\em Scalability of the consensus algorithm:}
+
+Known and limited block producers (delegated nodes or participants) means that blocks can be propagated through the
+network much more efficiently, enabling significant scalability increases. Blocks can also be consistently and reliably
+produced in a much smaller time frame. Also by tuning various parameters, it becomes possible to set this timeframe to
+as low as 0.5 seconds if desired.  Furthermore, finality can be reached as soon as ⅔ of the block producers have
+confirmed a transaction, with strong guarantees that a transaction is on a valid chain even before that. 
+
+Given that the top 5 blockchains, in terms of speed, are using DPOS, this becomes the natural choice for Latitude.
 
 \newpage
 \section{Scaling the Latitude Architecture}
