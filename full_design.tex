@@ -144,6 +144,26 @@ where
 The amount of trust is used in Latitude to create proofs for various observations such as Location, Mapping, Traffic
 etc. A combination of trust and stake are used in the DPOS and Governance operations.
 
+Trust and Stake are combined into a single factor called the {\em l-factor}. The l-factor is computed as follows:
+
+\newcommand\LFACTOR{\mathit{l_factor}}
+\begin{equation*}
+    \label{eq_l_factor}
+    \LFACTOR(E) = \eta S(E) + \gamma T(E)
+\end{equation*}
+where
+\begin{itemize}
+    \item $\LFACTOR(E)$: The value of the l-factor metric for participant E.
+    \item $S(E)$: The amount of stake put forth by participant E.
+    \item $\eta$: Normalization factor for the stake metric.
+    \item $T(E)$: The amount of trust as given in the trust ledger for participant E.
+    \item $\gamma$: Normalization for the trust metric.
+\end{itemize}
+
+The l-factor value combines both trust and stake into a single metric which is used to determine if a node can be
+allowed to participate in key network operations. These operations include block production, acting as delegates, or
+even participation in the governing council.
+
 \subsection{Cryptography layer} \label{sec:crypto} Latitude makes use of state-of-the-art cryptographic protocols to
 provide various proofs, access control, confidentiality and other properties that are important in a decentralized
 system.
