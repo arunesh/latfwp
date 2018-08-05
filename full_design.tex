@@ -53,7 +53,7 @@ base layer can be an existing blockchain so that the Latitude essentially provid
 operations. This design shall be sufficient for the first few versions of Latitude. Long term we shall migrate to our
 own base blockchain to help scale operations that work better for the Latitude dapps.
 
-Delegated Proof of Stake (DPOS) is the fastest, efficient and decentralized consensus model available today. DPOS
+Delegated Proof of Stake (DPOS) is a fast, efficient and decentralized consensus model available today. DPOS
 leverages the power of stakeholder approval voting to resolve consensus issues in a fair and democratic way. All network
 parameters, from fee schedules to block intervals and transaction sizes, can be tuned via elected delegates.
 Deterministic selection of block producers shows that transactions can be confirmed in an average of less than a second
@@ -95,6 +95,54 @@ and other range queries, K-nearest neighbor searches, route optimization algorit
 % - Location heatmaps.
 % - Indexing road and driving data.
 % - Primitives for storing driving data for autonomous vehicles
+
+\subsection{Trust Ledger}
+\label{sec:trust}
+
+One of the core concepts in Latitude is the presence of a decentralized trust and reputation managment system. Trust and
+reputation systems have been widely used in e-Commerce applications. They are well understood in terms of attacks and
+game theoretic models \cite{rahimi_2017, rahimi_2012}. Latitude uses trust as a way to reward participants who have been
+{\em consistently} honest over a period of time. Trust is also central in creating proofs on Latitude as discussed in
+Section \ref{sec:crypto}.
+
+The Trust ledger is a decentralized ledger accessible to everyone in the system. It consists of a trust model where each
+participant's trust is stored and updated through specific operations. The following salient points explain the design
+of the trust model in Latitude:
+
+\begin{itemize}
+    \item Trust is gained via honest operation: Each honest operation by a participant helps increase its trust value.
+        The decision of whether an operation is completed honestly happens through consensus on a smart contract and
+        depends on the specifics of an operation. For example, successful proofs of location or being a participant in
+        proving other's location helps increase trust. As another example, reliable operation in contributing resources
+        such as disk, network etc also helps increase trust.
+    \item Trust is different from stake: Stake is purely a measure of the amount of LAT token held by an entity. While
+        it gives economic incentives for entities to operate honest, it does not capture long-term honest operation
+        behavior that Trust and Reputation system can do \cite{dong_2010}.
+    \item Trust depreciation: Trust can depreciate either through dis-honest or unreliable operation. This decision is
+        also arrived via consensus on an operation-specific smart contract. For example, if a participant contributes
+        ride-sharing data which is shown to be flawed (possibly using a trusted party such as an Uber-API call),
+        the trust level for this participant gets drained. Trust can also {\em decay} over time if nodes do not
+        participate in network operations. Thus, there is a freshness dimension to the trust value in Latitude.
+\end{itemize}
+
+\noindent
+{\em Half-life based exponential Trust decay:}
+Trust in Latitude can decay over time in a way that is similar to how radioactive elements decay
+using an half-life based formula shown below. This is to ensure that the trust values reflect freshness in operation.
+The half-life value is a controllable parameter which indicates the duration after which the trust gets halved.
+\begin{equation*}
+    \label{eq_trust_decay}
+    N(t) = N_0 (1/2)^(  t / t_{1/2))
+\end{equation*}
+where 
+\begin{itemize}
+    \item $N(t)$: The amount of trust at time $t$.
+    \item $N_0)$: The amount of initial trust before decay.
+    \item $t_{1/2}$: Half-life of the trust decay model.
+\end{itemize}
+
+The amount of trust is used in Latitude to create proofs for various observations such as Location, Mapping, Traffic
+etc. A combination of trust and stake are used in the DPOS and Governance operations.
 
 \subsection{Cryptography layer} \label{sec:crypto} Latitude makes use of state-of-the-art cryptographic protocols to
 provide various proofs, access control, confidentiality and other properties that are important in a decentralized
