@@ -74,7 +74,7 @@ of the early launches for the beta version of the Latitude platform.
 %Other players:
 % - City, Law enforcement, analytics use cases.
 
-\subsection{Telematics side-chain}
+\subsection{Telematics Application Layer}
 
 Data is the most important asset for Telematics applications. Thus, sharing of data, computations and algorithms can be
 beneficial to companies, users and the ecosystem in general. In fact, by using the Latitude blockchain it becomes
@@ -153,7 +153,7 @@ to "carry" their score or reputation from one platform to another, thus preventi
 % City, Law enforcement, analytics use cases.
 % Car history use cases (better version of Carfax).
 
-\subsection{Mapping and Location side-chain}
+\subsection{Mapping and Location Application Layer}
 
 Mapping and Location-based services and analytics is another big segment that Latitude can address through
 decentralization. Mapping and real-time location/speed data is a huge market that apps like Waze are able to access.
@@ -209,7 +209,7 @@ platform can enable new applications not previously possible due to the platform
 % Authenticated location applications:
 % Access control or privileges by virtue of location.
 %
-\subsection{Smart city and Govt Application side-chain}
+\subsection{Smart city and Govt Application Layer}
 
 Smart cities refer to a large set of applications that can improve the life of a citizen by providing better amenities.
 Examples include real-time data for parking, data-driven urban planning, city-wide zoning research,
@@ -234,3 +234,28 @@ Federal government for various regulatory reasons.
 %  Real-time understanding of citizen data.
 %  Compliance:
 %  Insurance, Ridesharing companies regulatory compliance enforced using smart contracts on the Latitude blockchain.
+
+\section{Implemenation Roadmap}
+\label{sec:roadmap}
+
+In this Section, we discuss an implementation roadmap for Latitude for the next year. For the initial development, we
+shall use an existing blockchain for the base layer, such as Ethereum, EOS or Neo. The design shall include an
+abstraction layer so that later we can fit in our own Latitude Blockchain to support all operations. The following is
+the roadmap for development. Note that this development happens in parallel with customer acquisition, platform
+promotion and other business development activities:
+
+\begin{enumerate}
+    \item Ride-sharing protocol layer: Build a Latitude SDK and blockchain protocol layer for ride-sharing data. Build a
+        simple smart contract substrate to support ride-sharing data collection.
+    \item Spatial datastore: Build ability to store and retrieve location, mapping, telematics and ride-sharing data.
+    \item Proof of X: Build smart contracts for proof of location, mapping and others.
+    \item SDK Developer launch: Launch hackthons to show case proof of location, ride-share, mapping and other forms of
+        data sharing.
+    \item Regulatory smart contracts: Demonstrate implementation of city/state regulations on transportation data.
+    \item Testnet launch: Launch testnet with above capabilities. Grow developer community with 1000 smart contracts and
+        dapps written on the platform.
+    \item Latitude Blockchain: Build the core blockchain, governance layer and mining code. Update testnet with core
+        blockchain capabilities. Iterate, bugfix and get feedback from community.
+    \item Launch mainnet: Launch mainnet with own Latitude blockchain, SDKs for each application layer, 1000+ smart
+        contract library, dapps and other developer tools.
+\end{enumerate}
