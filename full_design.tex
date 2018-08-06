@@ -27,7 +27,7 @@ Figure \ref{fig:lat-arch} presents the architecture of the Latitude blockchain i
 innovations that will be built into it. The overall architecture of the Latitude Blockchain consists of a base
 blockchain and a protocol implementation (Dapp SDK and smart contract APIs) for each application vertical. This choice
 of an architecture gives the maximum flexibility for each application vertical to use its own protocol mechanisms for
-token incentives while allowing for summaries or Merklized proofs of transactions to be commited to the base chain. In
+token incentives while allowing for summaries or Merklized proofs of transactions to be committed to the base chain. In
 the first (few) version of Latitude, the base chain might be an existing blockchain such as Ethereum, EOS, Zilliqa or
 Neo. Eventually Latitude might move to a specialized design of a blockchain that works well for Transportation data and
 dapps. The specific mechanisms for each business vertical shall be discussed in Section \ref{sec:apps}.
@@ -39,7 +39,7 @@ functions for transportation applications. This will also work better with Latit
 discussed in Section \ref{sec:roadmap}.
 
 {\em Side-chain based scaling:} As Latitude grows, it might be possible to transition each application protocol vertical
-layer into its own side-chain. This will allow application-specific governence, consensus and contract rules to be baked
+layer into its own side-chain. This will allow application-specific governance, consensus and contract rules to be baked
 into the side-chain design. Depending on the application, it might be necessary for multiple side-chains to exist within
 a vertical, in which case we shall use composable side-chains similar to Plasma. This allows for a hierarchical
 side-chain structure if needed with eventual commitment to the mainchain. This is further discussed in Appendix
@@ -64,7 +64,7 @@ consensus algorithms.  The competitive part is larger stakeholders having an inf
 Latitude, it is also possible to gain a larger stake by accruing what we call "trust" through honest operation over a
 period of time. The delegates that have the most votes will take their turn to produce a block cooperatively in a
 sequence. A $2/3$ majority of consensus among the delegates over the {\em last minted block} is needed to achieve
-consensus and mint a new block onto the chain. Further discussion on Governance and other paremeters of a custom
+consensus and mint a new block onto the chain. Further discussion on Governance and other parameters of a custom
 Blockchain design are discussed in Appendix \ref{app:latchain}.
 
 \subsection{Spatial datastore}
@@ -89,7 +89,7 @@ operations.
 \subsection{Trust Ledger}
 \label{sec:trust}
 
-One of the core concepts in Latitude is the presence of a decentralized trust and reputation managment system. Trust and
+One of the core concepts in Latitude is the presence of a decentralized trust and reputation management system. Trust and
 reputation systems have been widely used in e-Commerce applications. They are well understood in terms of attacks and
 game theoretic models \cite{rahimi_2017, rahimi_2012}. Latitude uses trust as a way to reward participants who have been
 {\em consistently} honest over a period of time. Trust is also central in creating proofs on Latitude as discussed in
@@ -244,17 +244,17 @@ the Latitude platform.
         t_i$.
     \item $t_0$ is the base level of trust assigned to any third party untrusted source of data.
 
-    \item Each data source (such an an app installation, or a third-party source) is indentified using a certificate's
+    \item Each data source (such an an app installation, or a third-party source) is identified using a certificate's
         public key. If this is a fully untrusted source that belongs to a third party, they start at the lowest level of
         trust $t_0$.
 
     \item $t_1$ is the trust assigned to a second party integration with Latitude's SDKs where the SDKs directly compute the
         observation and report it to the system using second-party APIs. Examples include Apps in the trusted App stores
         that integrate with Latitude.
-    \item $t_2$ is the trust assigned to a first-pary integration, such as a Latitude mobile app, or a first-party app
+    \item $t_2$ is the trust assigned to a first-party integration, such as a Latitude mobile app, or a first-party app
         from trusted partners such as SherpaShare.
-    \item $tmin_{pf}$ is the minimum trust needed for a specific proof or obervation. Each proof type might have a
-        different requirment for this parameter. The computed proof also carries this parameters as an indication of
+    \item $tmin_{pf}$ is the minimum trust needed for a specific proof or observation. Each proof type might have a
+        different requirement for this parameter. The computed proof also carries this parameters as an indication of
         consensus or trust.
     \item Trust map, $\TM(e)$ gives the amount of trust recorded in the ledger for the entity $e$. The entity could be an
         organization, an individual or a user (as identified by an app installation, for example).
@@ -263,7 +263,7 @@ the Latitude platform.
     \item The entity requesting the proof, submits a request $R(e, t_b, V, \TM(e))$, where $R$ represents the proof
         request. The request includes credentials for entity $e$, the base trust level in the request $t_b$, the
         evidence of real-world observation (such as radio signal strength) $V$ and the existing entry in the trust
-        legder $\TM(e)$.
+        ledger $\TM(e)$.
     \item Concurrence Weight: Each witness that concurs with an observation provides a {\em concurrence weight} which is
         the probability that they think the event happened. This is a value between 0 and 1. Denoted as $W_c(w, e, V)$,
         where the parameters are witness or observer $w$, entity $e$ and evidence $V$.
@@ -280,12 +280,12 @@ respective proof.
 \noindent
 {\bf Algorithm for Proof of an observation $X$}:
 \begin{enumerate}
-    \item Suppose $e$ is the entity that initiates a request for proof of an obervation $X$ made by $e$.
+    \item Suppose $e$ is the entity that initiates a request for proof of an observation $X$ made by $e$.
     \item The proof system finds a subset (possibly randomly sampled) of participants $S$ who are able
-        to {\it concur} with the obervation $X$. Each participant, $p_i \in S$, assigns a {\em concurrence} weight
+        to {\it concur} with the observation $X$. Each participant, $p_i \in S$, assigns a {\em concurrence} weight
         $W(p_i, X) \in [0,1]$ depending on how well they concur with the observation.
     \item Normalization factor $\NF(p_i, X)$: This is a multiplier, usually greater than 1, that signifies the
-        amplification in trust as a funciton of how the observation was concurred upon. 
+        amplification in trust as a function of how the observation was concurred upon. 
     \item Each observer $p_i \in S$, provides a normalization factor $\NF(p_i, X)$ and a concurrence weight $W(p_i, X)$
         to the proof.
     \item The proof computes the total trust in the observation $X$ as $T_{pf}(X, e, S)$, given by Equation
@@ -324,7 +324,7 @@ The goal of the above formula is multi-fold:
         over time their trust level will get degraded using a gradient method used in other reputation systems
         \cite{sen2010}.
     \item Rewarding honest behavior: Over time as observers and entities produce results with consistency, their
-        historicla reputation gets better and recorded in the trust ledger.
+        historical reputation gets better and recorded in the trust ledger.
 \end{enumerate}
 
 \subsubsection{Proof of Location}
@@ -372,7 +372,7 @@ The framework provided by Latitude is general enough to capture different implem
 uses a trusted set of radio beacons or "anchors" to provide location signals. These essentially become highly trusted
 observers or participants in our framework as they are essentially first-party observers (with a large amount of
 base-level trust). As another example, Platin is a blockchain designed specifically for a proof of location. Their use
-of sensors and increase in trust over time falls in line with the general concept of proof of obervation (possibly with
+of sensors and increase in trust over time falls in line with the general concept of proof of observation (possibly with
 different trust constants).
 
 \subsubsection{Proof of Ride}
@@ -386,12 +386,12 @@ trust on the nature and parameters of the ride.
 The proof of ride is computed using a time series of location updates. A Hidden Markov Model or other methods
 \cite{wu2011} can be used as "algorithmic observers or verifiers" of a location trace. The location trace can be
 supplanted with sensor data collected using a direct integration of the Latitude SDK. The sensor data should be in full
-correlation with the location trace and would consistute the evidence set $V$ for this proof.
+correlation with the location trace and would constitute the evidence set $V$ for this proof.
 
 The proof of ride algorithm is the following:
 \begin{itemize}
     \item Entity submits an evidence $V$ which includes a series of locations, or proof of locations and sensor data.
-    \item Platform can compute the trust as a function of trust inherent in included locatin proofs. Also, in certain
+    \item Platform can compute the trust as a function of trust inherent in included location proofs. Also, in certain
         cases, it might be possible to have other observers to correlate the ride (such as passengers or drivers in a
         rideshare scenario).
     \item Algorithmic observers such as physical properties of the ride can also be used to add trust to the system.
@@ -516,12 +516,12 @@ WebAssembly (or wasm) is a binary instruction format for a stack-based virtual m
 portable and has a compilation target for high-level languages such as C++ and Go. The Latitude smart contract system
 shall support both C++ and Go languages. The choice of wasm was to make the execution of the smart contract efficient
 and thus have high throughput. Also, popular networks such as Ethereum are planning to move to eWasm as part of the
-Ethereum Virtuam Machine (EVM) 2.0. This which will help create a common developer pool (and other aspects such as
+Ethereum Virtual Machine (EVM) 2.0. This which will help create a common developer pool (and other aspects such as
 tooling, educational material, etc) in the community. Wasm's execution happens in a safe and sandboxed
 environment which can be beneficial in an adversarial and open network. It might also be possible to secure the Wasm
 execution using Trusted Execution Environments (TEEs) in the near future.
 
-The reason for chosing WebAssembly over the popular Solidity (or Vyper) used by the Ethereum Virtual Machine (EVM 1.0)
+The reason for choosing WebAssembly over the popular Solidity (or Vyper) used by the Ethereum Virtual Machine (EVM 1.0)
 is twofold: 
 WebAssembly compiles into native code and thus executes faster than Solidity or Javascript. Also, EVM 2.0 will feature
 a modified version of WebAssembly, namely {\it eWasm} thus reducing the cognitive burden on developers across both
@@ -584,7 +584,7 @@ The smart contract class utilizes the following semantics:
         used to initiate payment, other smart contracts such as proofs of X, or operations to the datastore.
     \item Data structures: These are private or public member variables in one or more objects that store dapp or
         contract state.
-    \item Events: Events are how the smart contracts interact with the real-world occurences. These include, for
+    \item Events: Events are how the smart contracts interact with the real-world occurrences. These include, for
         example, if a location update happens, or a driver score is updated, or a ride-share request is made, etc. Users
         can define their custom events in addition to the ones provided by each application layer protocol stack.
     \item Callback methods: These methods are trigger by the Latitude protocol layer when an event occurs. This allows
@@ -598,7 +598,7 @@ desirable to achieve consensus on data without making it open on the chain. Lati
 contracts using multi-party key distribution protocols. Multi-party key distribution creates a set of keys, such that a
 function (or a smart contract) can be computed in a distributed manner over a random piece of data without any single
 entity having full access to the data. The result of the computation has consensus and can be put on-chain using a
-cyrptographic proof or can be directly communicated to a decentralized  app.
+cryptographic proof or can be directly communicated to a decentralized  app.
 
 The availability of Trusted Execution Environments or hardware enclave can dramatically assist in the implementation of
 secret contracts. In the first version of Latitude, we shall use existing MPC communication protocols in this area to
@@ -615,7 +615,7 @@ possible to use TEEs using a design similar to Ekiden \cite{ekiden}.
 
 Latitude smart contracts will be sharded to improve performance. Existing blockchains such as Ethereum, Neo and EOS
 suffer from slow throughput on smart contract execution. One technique that has recently emerged as a way to scale
-performance is to shard the contract using annonatations on methods to expose specific semantics. For example, by
+performance is to shard the contract using annotations on methods to expose specific semantics. For example, by
 understanding portions of a smart contract that store data, that verify computations and that are callbacks from
 user-facing apps, it becomes possible to separate the execution among parallel nodes for much higher throughput
 \cite{chainspace}. 
@@ -635,7 +635,7 @@ and tools for rapid and iterative development.
 
 Latitude has its own token for use on the Latitude Blockchain, called LAT. There would be a fixed token supply for a
 certain period of time (4 years). A certain percentage of the tokens are reserved for funding and other operations, the
-detials of which are not discussed in this document. The rest of the tokens will be available for the network. In this
+denials of which are not discussed in this document. The rest of the tokens will be available for the network. In this
 Section, we discuss the Cryptoeconomics part of Latitude which creates the right incentive structure for various
 participants.  For an overview of Cryptoeconomics in the blockchain space, please see \cite{sinclair_crypto}.
 
@@ -647,7 +647,7 @@ resources, onboard the early adopters, fund developer communities, bug bounty pr
 
 The participants in Latitude are of the following types:
 \begin{itemize}
-    \item Miners: Anybody can "mine" the LAT token by contributin resources, such as disk, network and computing. This
+    \item Miners: Anybody can "mine" the LAT token by contributing resources, such as disk, network and computing. This
         is similar to most other blockchains, which also allows Latitude to be built as a layer 1-3 stack on other
         chains for the first few versions. The miners earn transaction fees and token rewards for mining a block. The
         consensus protocol is dPOS as discussed in the earlier Section.
@@ -715,7 +715,7 @@ in return for suitable incentives.
 \begin{itemize}
     \item Mining: Nodes can earn tokens when blocks are mined using the DPOS algorithm discussed in Section
         \ref{sec:arch} and Appendix \ref{app:dpos}.
-    \item Transaction fees: Transcation fees help pay delegates and DPOS participants for transactions. These could be
+    \item Transaction fees: Transaction fees help pay delegates and DPOS participants for transactions. These could be
         block production transaction or proof of X. For the proofs, the transaction fees are shared by the network and
         the other participants regardless of whether a proof succeeded or failed. Also, for each smart contract
         execution, the transaction fees get paid to the nodes that act as verifiers and to the network.
