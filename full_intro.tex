@@ -15,7 +15,7 @@ driver behavior determined by data from sensors.
 %Big data has become the fuel for Decision making, product evolution, AI applications, including the use of Deep Learning
 %and other techniques.
 
-Users of these applications are providing a staggering amount of data. However, due to centralization this data is
+Users of these applications are providing a staggering amount of data. However, due to centralization, this data is
 subject to policies, security and privacy practices that are not in the user's control. Moreover, its not possible for
 regulators or city governments to use this data for benefit of their citizens. Centralization creates data silos which
 dramatically reduce the utility of the technology. The recent breaches in data usage, security and privacy have shown
@@ -27,15 +27,15 @@ disruptive applications? Lately, Blockchain technology has emerged as a way for 
 applications in a secure, privacy-aware, verifiable and trusted manner. The possibility of enabling data sharing using
 blockchain technology with cryptographically protected sharing methods has the potential to change the sharing economy.
 
-We present Latitude, which is designed to be the best blockchain for the Transportation industry. Latitude allows the
-development of decentralized apps using smart contracts powered by a geo-spatial datastore. This is built off strong
-cryptographic proofs and primitives that provide security, privacy and anonymity guarantees.  For the Transportation
-Industry, such data sharing can help solve some critical problems.  For example, cities can share the data they
-collected about transport patterns with different stake holders such as transportation companies to reduce the traffic
-jams during rush hour \cite{traffic_jam}. First responders and aid workers can share data between them to better coordinate
-disaster relief efforts \cite{bharosa_2010}.
+We present Latitude, which is designed to be a platform for building decentralized applications (dapps) for the
+Transportation industry. Latitude allows the development of such dapps using smart contracts powered by a
+geo-spatial datastore. This is built off strong cryptographic proofs and primitives that provide security, privacy and
+anonymity guarantees.  For the Transportation Industry, such data sharing can help solve some critical problems.  For
+example, cities can share the data they collected about transport patterns with different stake holders such as
+transportation companies to reduce the traffic jams during rush hour \cite{traffic_jam}. First responders and aid
+workers can share data between them to better coordinate disaster relief efforts \cite{bharosa_2010}.
 
-For the common user, Latitude can help build decentralized apps that can provide incentives to both drivers and users
+For the common user, Latitude can help build dapps that can provide incentives to both drivers and users
 for sharing their data. This creates new incentive structures for apps such as ride sharing or per-mile insurance that
 were not possible before. While Latitude allows safe and incentivized sharing of data, it is also a platform for
 building decentralized applications for the Transportation Industry. For example, a city can build applications on
@@ -49,11 +49,11 @@ shall include mobile SDKs to help build mobile apps that can directly tie into t
 has the potential to disrupt existing centralized applications in the Transportation Industry and create new ones that
 were simply not possible before.
 
-The Lattiude system consists of a base blockchain which uses Delegated Proof of Stake (dPOS) as its consensus
-mechanism. This base blockchain supports various application vertical where each vertical is a side-chain. Only
-Merkle-proofs of aggrgated transactions from the side-chains are propagated onto the base blockchain layer. This
-architecture allows each side-chain to define its own rules on how the transactions are committed including their own
-consensus mechanisms which migth work better for the application vertical.
+The Lattiude system consists of a base blockchain which uses Delegated Proof of Stake (dPOS) as its consensus mechanism.
+This base blockchain supports various application verticals where each vertical is a protocol layer or eventually its
+own side-chain. Only Merkle-proofs of aggregated transactions from the side-chains are propagated onto the base
+blockchain layer. This architecture allows each side-chain to define its own rules on how the transactions are committed
+including their own consensus mechanisms which migth work better for the application vertical.
 
 %
 %- Centralized solution examples:
@@ -112,8 +112,11 @@ blockchain, including the core building blocks that make it work well for applic
 In Section \ref{sec:apps}, we discuss details of four different classes of applications that can be built on Latitude
 and how third-party companies can build decentralized applications on the platform. Each of these classes correspond to
 different markets or industries that Latitude can support within the Transportation umbrella. We shall also discuss the
-specific modules that Latitude will have to fully support each of these classes of applications. In the Appendix
-\ref{sec:blockchain}, we discuss why Blockchains are the right technology to disrupt the Transportation industry.
+specific modules that Latitude will have to fully support each of these classes of applications. We present our
+Implementation roadmap to build Latitude in Section \ref{sec:roadmap}. In the Appendix \ref{sec:blockchain}, we discuss
+why Blockchains are the right technology to disrupt the Transportation industry. Appendix \ref{app:dpos} discusses the
+details of the Latitude consensus algorithm and mining. Appendix \ref{app:latchain} presents a side-chain design that
+can be used to scale Latitude beyond a protocol middleware layer stack.
 
 %We are in the midst of building a new Internet. Blockchain networks like Ethereum have popularized the idea of
 %unstoppable, owner less applications that are run on an open network of untrusted but incentivized nodes without the

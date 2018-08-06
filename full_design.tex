@@ -7,59 +7,56 @@
 
 \section{The Latitude Platform}\label{sec:design}
 
-In this Section, we present a high-level design of the Latitude platform.  We start with an overview of the key design
-principles that will guide the rest of the design for Latitude. Its important to note here that for implementation
-purposes, it might be possible to use an existing core blockchain for the underlying functionalities and build Latitude
-as a layer on top.
+In this Section, we present a high-level design of the Latitude platform. Latitude is a decentralized application
+platform for Transportation. It is an application platform as it allows the development of applications in a
+decentralized environment using blockchain technologies.
 
-The purpose of the Latitude platform is to become the best blockchain-based ecosystem in the world for decentralized
-applications for the Transportation Industry. Specifically, this boils down to constructs in the blockchain that can
-handle spatial, mapping, traffic, driving data including data relating to other modalities of transport (bike sharing,
-walking, even air routes later on). Figure \ref{fig:lat-arch} presents the architecture of the Latitude blockchain in
-terms of the core technological innovations that will be built into it.
+We start with an overview of the key design principles that will guide the rest of the design for Latitude. Its
+important to note here that for implementation purposes, it might be possible to use an existing core blockchain for the
+underlying functionalities and build Latitude as a layer on top. This is further discussed in Section \ref{sec:roadmap}.
+
+Our goal is to become the best blockchain-based ecosystem in the world for decentralized applications for the
+Transportation Industry. Specifically, Latitude can provide new ways to handle spatial, mapping, traffic, driving data
+including data relating to other modalities of transport (bike sharing, walking, even air routes later on). Latitude
+will provide novel methods to build applications that utilize this shared data.
 
 \subsection{Architecture overview}
 \label{sec:arch}
 
-The overall architecture of the Latitude Blockchain consists of a base blockchain and a protocol implementation (Dapp
-SDK and smart contract APIs) for each application vertical. This choice of an architecture gives the maximum flexibility
-for each application vertical to use its own protocol mechanisms for token incentives while allowing for summaries or
-Merklized proofs of transactions to be commited to the base chain. In the first (few) version of Latitude, the base
-chain might be an existing blockchain such as Ethereum, EOS, Zilliqa or Neo. Eventually Latitude might move to a
-specialized design of a blockchain that works well for Transportation data and dapps. The specific mechanisms for each
-business vertical shall be discussed in Section \ref{sec:apps}.
+Figure \ref{fig:lat-arch} presents the architecture of the Latitude blockchain in terms of the core technological
+innovations that will be built into it. The overall architecture of the Latitude Blockchain consists of a base
+blockchain and a protocol implementation (Dapp SDK and smart contract APIs) for each application vertical. This choice
+of an architecture gives the maximum flexibility for each application vertical to use its own protocol mechanisms for
+token incentives while allowing for summaries or Merklized proofs of transactions to be commited to the base chain. In
+the first (few) version of Latitude, the base chain might be an existing blockchain such as Ethereum, EOS, Zilliqa or
+Neo. Eventually Latitude might move to a specialized design of a blockchain that works well for Transportation data and
+dapps. The specific mechanisms for each business vertical shall be discussed in Section \ref{sec:apps}.
 
-\begin{itemize}
-    \item Overall architecture.
-    \item Side chains. Main chain.
-    \item chains interact mechanism.
-    \item Cross-chain transactions are commitment protocol.
-
-\end{itemize}
-
-Each application vertical utilizes atleast one side-chain. Depending on the application, it might be necessary for
-multiple side-chains to exist within a vertical, in which case we shall use composable side-chains similar to Plasma.
-This allows for a hierarchical side-chain structure if needed with eventual commitment to the mainchain.
-
-Implementation Note: For the alpha version of Latitude, it might be possible to use an existing chain with high
+{\em Implementation Note:} For the alpha version of Latitude, it might be possible to use an existing chain with high
 transaction velocity and low cost, such as EOS, Neo, Zilliqa or Harmony as a drop-in replacement for the base chain
 functionality. In the long term, it might be beneficial to have our own base-chain with built in smart contract
-functions for transportation applications. This will also work better with Latitude's own token economics.
+functions for transportation applications. This will also work better with Latitude's own token economics. Further
+discussed in Section \ref{sec:roadmap}.
 
-\noindent
-{\em Base Blockchain layer:}
-The Latitude platform uses a base blockchain layer for Layer-0 operations as shown in Figure \ref{fig:lat-arch}. The
-base layer can be an existing blockchain so that the Latitude essentially provides middleware for layer 2 and 3
-operations. This design shall be sufficient for the first few versions of Latitude. Long term we shall migrate to our
-own base blockchain to help scale operations that work better for the Latitude dapps.
+{\em Side-chain based scaling:} As Latitude grows, it might be possible to transition each application protocol vertical
+layer into its own side-chain. This will allow application-specific governence, consensus and contract rules to be baked
+into the side-chain design. Depending on the application, it might be necessary for multiple side-chains to exist within
+a vertical, in which case we shall use composable side-chains similar to Plasma. This allows for a hierarchical
+side-chain structure if needed with eventual commitment to the mainchain. This is further discussed in Appendix
+\ref{app:sidechain}.
 
-Delegated Proof of Stake (DPOS) is a fast, efficient and decentralized consensus model available today. DPOS
-leverages the power of stakeholder approval voting to resolve consensus issues in a fair and democratic way. All network
-parameters, from fee schedules to block intervals and transaction sizes, can be tuned via elected delegates.
-Deterministic selection of block producers shows that transactions can be confirmed in an average of less than a second
-\cite{eos_producers}. This speed is important for scaling the Latitude chain.
+\noindent {\em Base Blockchain layer (layer-0):} The Latitude platform uses a base blockchain layer for Layer-0
+operations as shown in Figure \ref{fig:lat-arch}. The base layer can be an existing chain or Latitude's own blockchain.
+For each application layer, Latitude provides middleware for layer 2 and 3 operations.
 
-Latitude's Delegated proof of stake system uses a set of "delegates" for voting on a block producer. The delegates are
+The base chain shall use Delegated Proof of Stake (DPOS) as its consensus mechanism.  DPOS is a fast, efficient and
+decentralized consensus model available today. DPOS leverages the power of stakeholder approval voting to resolve
+consensus issues in a fair and democratic way. All network parameters, from fee schedules to block intervals and
+transaction sizes, can be tuned via elected delegates.  Deterministic selection of block producers shows that
+transactions can be confirmed in an average of less than a second \cite{eos_producers}. This speed is important for
+scaling the Latitude chain.
+
+Latitude's DPOS system uses a set of "delegates" for voting on a block producer. The delegates are
 "promoted" based on time-based trust or stake (or a combination of these). This design is similar to the Cosmos
 blockchain and differs from other dPOS system such as EOS. The exact number of delegates can be a tunable parameter that
 can be changed by the governing council of nodes. This version of takes the best of both cooperative and competitive
@@ -79,22 +76,15 @@ driven, route information, etc, (iv) multi-modal transport data such as biking, 
 Each of these data types have very special characteristics which the underlying datastore can be optimized for and allow
 for programming using what we call the {\em Latitude Smart Contract} framework. 
 
-The datastore would include spatial, quad-tree or an R-tree based indexes for efficient querying and other operations that
-most Geographic Information Systems (GIS) would support in a centralized manner today. It would also include functions
-to compute heatmaps, driving maps and statistics such as Traffic predictions including real-time analytics. Depending on
-how Latitude evolves, the datastore can include additional functionalities to support the data sharing among autonomous
-vehicles since they use most of the similar datatypes mentioned above. The datastore would support circular, rectangular
-and other range queries, K-nearest neighbor searches, route optimization algorithms, etc. Figure
+The datastore would include spatial, quad-tree or an R-tree based indexes for efficient querying and other operations
+that most Geographic Information Systems (GIS) would support in a centralized manner today. It would also include
+functions to compute heatmaps, driving maps and statistics such as Traffic predictions including real-time analytics.
+Depending on how Latitude evolves, the datastore can include additional functionalities to support the data sharing
+among autonomous vehicles since they use most of the similar datatypes mentioned above. The datastore would support
+circular, rectangular and other range queries, K-nearest neighbor searches, route optimization algorithms, etc. Figure
 \ref{fig:geo_spatial_query} shows some of the queries that such a datastore can support.
-
-%Datastore
-% - Optimized for Geographic, Geo-spatial data.
-% - Location, Mapping data and computation.
-% - Ability to Store, index, query and build smart contracts optimized for such data.
-% - Support for various spatial indexes.
-% - Location heatmaps.
-% - Indexing road and driving data.
-% - Primitives for storing driving data for autonomous vehicles
+For implementation purposes, Latitude shall use existing decentralized databases to support the spatial datastore
+operations.
 
 \subsection{Trust Ledger}
 \label{sec:trust}
