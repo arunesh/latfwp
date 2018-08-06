@@ -29,7 +29,7 @@ discussed in Section \ref{sec:trust}. The block production algorithm works as fo
 \item The number of block producers is lower bounded $N_{min}$ and upper bounded $N_{max}$, but is not a strict value.
 
 \item Block producers can be voted out any time if bad behavior is determined. The threat of loss of stake and/or
-    reputation is a deterren to bad behavior. Also slashing conditions can be easily implemented if so desired.
+    reputation is a deterrent to bad behavior. Also slashing conditions can be easily implemented if so desired.
 \item Block consensus: Once a block producer set is determined, a consensus algorithm such as PBFT is used to
     achieve $2/3 +1$ majority to decide on a block. Producers always converge to the longest chain as as long as a
         majority of the block producers are honest, the system will converge.
@@ -42,7 +42,7 @@ explicitly sets the balance, though it can be modified later through governance 
 
 \noindent
 {\em Rewards for block production:} While some blockchains such as EOS, purely reward block producers through inflationary
-economics, Latitude uses a combination of trasaction rewards and inflation. The rewards allow nodes that demonstrate
+economics, Latitude uses a combination of transaction rewards and inflation. The rewards allow nodes that demonstrate
 trust (and less stake) to earn tokens. The exact distribution of reward vs inflation based earnings shall be determined
 via experiments and research on the testnet.
 
@@ -62,9 +62,9 @@ Given that the top 5 blockchains, in terms of speed, are using DPOS, this become
 
 As the Latitude platform grows both in terms of aggregate data/users or partners, it might become necessary to split
 each application vertical into its own side-chain. A Latitude base-chain will work with various side-chains to enforce
-basic platform rules such as governance, token pricing, platfrom-wide smart contracts, etc.  
+basic platform rules such as governance, token pricing, platform-wide smart contracts, etc.  
 
-Each side-chain is essentially its own blockchain with merkle summaries being committed to the main chain. This
+Each side-chain is essentially its own blockchain with Merkle summaries being committed to the main chain. This
 side-chain architecture can be used to accomplish the following:
 
 \begin{itemize}
@@ -92,7 +92,7 @@ developed at the point when Latitude scales enough to warrant a side-chain based
 In general, we expect the side-chain mining to use variants or the same DPOS mining algorithm as the main Latitude
 blockchain.  However, the design allows for each side-chain could potentially have their own mining or consensus based
 block reward algorithms. For example, the ride-sharing sidechain could reward users for sharing data. Certain
-permissioned side-chains could potentialy use their own token which converts to the Latitude token on the main chain.
+permissioned side-chains could potentially use their own token which converts to the Latitude token on the main chain.
 
 Certain side-chains, such as the smart-city applications might purely operate on a proof of work model and eliminate
 mining altogether.
@@ -139,7 +139,7 @@ higher than datastore operations in order to ensure correct execution of algorit
 such operations would require strong consistency for their CRUD functionalities. We expect the Latitude design to
 support 10-100K transactions per second at its peak usage.
 
-These transactions essentialy use the computing resource on the network. The consensus is achieved through verifying or
+These transactions essentially use the computing resource on the network. The consensus is achieved through verifying or
 using a small set of testdata for each algorithm. The verifier nodes are randomly chosen and paid for using the
 transaction fees. Depending on how much consensus is needed, the smart contract responsible for the algorithm execution
 can lock in certain amount of token as collateral (or escrow).
