@@ -175,6 +175,21 @@ potential to disrupt the "Check-ins" industry. The Facebook platform alone gets 
 other major players here include Foursquare, Yelp and Google maps. The sharing of check-ins data on the Latitude
 platform can enable new applications not previously possible due to the platform lock-ins.
 
+Here are some of the features present in this layer:
+
+\begin{itemize}
+    \item SDK for integrating with mobile apps that provide mapping/location data and related proofs. These SDKs
+        integrate with smart contracts built as part of the protocol layer on Latitude to support mapping/location.
+    \item SDK contains APIs for various mapping/location use cases, such as providing landmark data, providing location
+        data and proofs, traffic incident reports to name some.
+    \item Protocol layer for building apps: The mapping/location protocol layer includes APIs for dapp developers to
+        build apps on this ecosystem that can utilize the mapping/location data. Apps can include real-time traffic,
+        incident monitoring or prediction. Utilizing location proof for access control or other applications such as
+        check-ins. Building a decentralized Waze is a canonical exmaple here.
+    \item Datastore API: The protocol layer includes a datastore API to query and index mapping/location data for
+        efficient retrieval.
+\end{itemize}
+
 %Waze example:
 % - 70 Mil users, 500k volunteers share data. user spends 480 min/month.
 %
@@ -209,7 +224,7 @@ platform can enable new applications not previously possible due to the platform
 % Authenticated location applications:
 % Access control or privileges by virtue of location.
 %
-\subsection{Smart city and Govt Application Layer}
+\subsection{Smart city and Government Application Layer}
 
 Smart cities refer to a large set of applications that can improve the life of a citizen by providing better amenities.
 Examples include real-time data for parking, data-driven urban planning, city-wide zoning research,
@@ -220,6 +235,19 @@ Latitude blockchain can host such smart city applications and collect data from 
 to provide data using token economics and the regulators or city officials can "purchase" data or results using smart
 contracts. It might be possible to share aggregated data with careful focus on privacy/anonymity to State level or
 Federal government for various regulatory reasons. 
+
+\begin{itemize}
+    \item City can use traffic data for to improve planning and decisions for roads, HOV lanes, traffic lights and
+        parking. The algorithms that process this data will be controlled using smart contracts that run on behalf of
+        the city on the network using the Latitude protocol layer for smart city. The cost of running the smart contract
+        gets payable using the LAT token.
+    \item The city can also use the platform to institute regulations such as reporting of accidents or traffic
+        incidents. In this regard, citizen safety is an application that can be built on this layer. Safety includes
+        proof of location in real-time integrated with Police or Fire departments.
+    \item Bike ride-sharing: Bike ride-sharing has seen a recent boom, but are also facing regulatory backlash. Using
+        Latitude, bike ride-share providers can share the current locations of where bikes are parked. City officials
+        can designate "virtual" no-bike zones which can be enforced on the chain using contracts and proofs. 
+\end{itemize}
 
 %One of the final set of applications.
 %Smart city applications:
@@ -248,12 +276,16 @@ promotion and other business development activities:
     \item Ride-sharing protocol layer: Build a Latitude SDK and blockchain protocol layer for ride-sharing data. Build a
         simple smart contract substrate to support ride-sharing data collection.
     \item Spatial datastore: Build ability to store and retrieve location, mapping, telematics and ride-sharing data.
+    \item Latitude smart contract layer: Using WASM, build custom libraries for Latitude smart contracts. Build APIs for
+        Ride-sharing or mapping/location as the first application layer.
     \item Proof of X: Build smart contracts for proof of location, mapping and others.
     \item SDK Developer launch: Launch hackthons to show case proof of location, ride-share, mapping and other forms of
         data sharing.
     \item Regulatory smart contracts: Demonstrate implementation of city/state regulations on transportation data.
     \item Testnet launch: Launch testnet with above capabilities. Grow developer community with 1000 smart contracts and
         dapps written on the platform.
+    \item Governance Layer: Create a list of governance operations. Build smart contracts that allow governance
+        decisions to be made. Create an initial list of governance nodes and membership parameters. Launch on testnet.
     \item Latitude Blockchain: Build the core blockchain, governance layer and mining code. Update testnet with core
         blockchain capabilities. Iterate, bugfix and get feedback from community.
     \item Launch mainnet: Launch mainnet with own Latitude blockchain, SDKs for each application layer, 1000+ smart
