@@ -160,13 +160,15 @@ even participation in the governing council.
 provide various proofs, access control, confidentiality and other properties that are important in a decentralized
 system.
 
-such as AES encryption, secure hash functions, PKI certificates, multi-party key distribution protocols, proxy key
-re-encryption schemes, Elliptic-curve based Digital Signatures \cite{ecdsa}. They help provide strong security, privacy,
-access control, confidentiality and anonymity guarantees. Anonymity guarantees are an important part of data-sharing
-smart contracts and privacy policies such as GDPR \cite{gdpr} especially for geo-spatial data such as location and maps.
-Latitude provides anonymity guarantees using cryptographic set-preserving computations as derived from research in
-\cite{kissner_set}. These can be suitably modified to allow for location-based anonymity which require stronger
-guarantees when compared to set-based anonymity methods \cite{divanis_kanon,xu_loc_anon}.
+Latitude AES encryption for storing data, secure hash functions for block production, PKI certificates as wallet
+addresses, multi-party key protocols for permissioned access control to data and smart contracts, proxy key
+re-encryption schemes to scale access control to a large audience, Elliptic-curve based Digital Signatures \cite{ecdsa}
+for data and contract integrity. They help provide strong security, privacy, access control, confidentiality and
+anonymity guarantees. Anonymity guarantees are an important part of data-sharing smart contracts and privacy policies
+such as GDPR \cite{gdpr} especially for geo-spatial data such as location and maps.  Latitude provides anonymity
+guarantees using cryptographic set-preserving computations as derived from research in \cite{kissner_set}. These can be
+suitably modified to allow for location-based anonymity which require stronger guarantees when compared to set-based
+anonymity methods \cite{divanis_kanon,xu_loc_anon}.
 
 Latitude also uses Merkle trees for cryptographic proof of audit, existence of data and verifiable computations
 \cite{becker2008}. These proofs can be shared as certificates among participants or be used in the Latitude smart
