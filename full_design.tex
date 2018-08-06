@@ -19,6 +19,7 @@ walking, even air routes later on). Figure \ref{fig:lat-arch} presents the archi
 terms of the core technological innovations that will be built into it.
 
 \subsection{Architecture overview}
+\label{sec:arch}
 
 The overall architecture of the Latitude Blockchain consists of a base blockchain and a protocol implementation (Dapp
 SDK and smart contract APIs) for each application vertical. This choice of an architecture gives the maximum flexibility
@@ -715,6 +716,24 @@ possible for the network to reward them with tokens. They could, upon sufficient
 rides or share with them others on the network. A similar model can be adopted for data concerning driver behavior where
 drivers using different apps and sensor algorithms can elect to share their data towards building a better driver score
 in return for suitable incentives.
+
+\noindent
+{\em Token mechanics: Based on the above design, we discuss the various ways in tokens get exchanged on Latitude:}
+\begin{itemize}
+    \item Mining: Nodes can earn tokens when blocks are mined using the DPOS algorithm discussed in Section
+        \ref{sec:arch} and Appendix \ref{app:dpos}.
+    \item Transaction fees: Transcation fees help pay delegates and DPOS participants for transactions. These could be
+        block production transaction or proof of X. For the proofs, the transaction fees are shared by the network and
+        the other participants regardless of whether a proof succeeded or failed. Also, for each smart contract
+        execution, the transaction fees get paid to the nodes that act as verifiers and to the network.
+    \item Security deposit (or collateral): Nodes put up stakes in order to participate in the voting process or the
+        Governing council. These stakes are in the form of the LAT token.
+    \item Dapps: Dapps built on the Latitude platform will transact on the LAT token. This could include datastore
+        resources, compute, network, proof of X or other SDK integrations.
+    \item Application specific business model: For each of the specific application areas such as Telematics or
+        Ride-sharing, there will exist specific models for transacting tokens. These shall be discussed in their
+        relevant sections.
+\end{itemize}
 
 \subsection{Governance on Latitude}
 

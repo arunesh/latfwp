@@ -51,7 +51,7 @@ via experiments and research on the testnet.
 Known and limited block producers (delegated nodes or participants) means that blocks can be propagated through the
 network much more efficiently, enabling significant scalability increases. Blocks can also be consistently and reliably
 produced in a much smaller time frame. Also by tuning various parameters, it becomes possible to set this timeframe to
-as low as 0.5 seconds if desired.  Furthermore, finality can be reached as soon as ⅔ of the block producers have
+as low as 0.5 seconds if desired.  Furthermore, finality can be reached as soon as $\frac{2}{3}$ of the block producers have
 confirmed a transaction, with strong guarantees that a transaction is on a valid chain even before that. 
 
 Given that the top 5 blockchains, in terms of speed, are using DPOS, this becomes the natural choice for Latitude.
@@ -71,23 +71,33 @@ side-chain architecture can be used to accomplish the following:
   \item Side-chain specific Governance: It becomes possible to divide governance into application specific rules on
         each side-chain. For example, a ride-sharing side-chain could include governance rules specific for ride
         providers and consumers. In a Telematics side-chain, the governance could include rules on how new driver
-        behavior algorithms are benchmarked, etc.
+        behavior algorithms are benchmarked, etc.  For example, open deep learning algorithms that compute DriverScore
+        can be required to demonstrate their performance on a public dataset available on the chain. Changes to these
+        algorithms might require higher level of consensus and demonstration of performance.
+
   \item Scaling operations: Side-chains allow Latitude to scale operations by only committing chain-wide state changes
       to the main-chain. These include account balances, core council or trust operations to be committed to the main
         chain, allowing all other application specific transactions to stay limited to each side-chain.
+   \item Representation of Users: The side-chain could include rules the directly empower users to control their data.  The definition of a
+user could be an entity that contributes driving data using one of the SDK-integrated apps.  Users can be directly
+represented as special entities on the chain in a separate ledger that lists them. These concepts shall be fully
+developed at the point when Latitude scales enough to warrant a side-chain based design.
+
   \item Permissioned or Enterprise side-chains: Side-chain architecture also allows Latitude to offer a permissioned,
       consortium or enterprise version. This looks more like a standard SaaS model where a set of companies can lease
         service space on the Latitude chain for their consortium operations.
 \end{itemize}
 
-\subsection{Side-chain mining:}
-
+\subsection{Side-chain mining}
 In general, we expect the side-chain mining to use variants or the same DPOS mining algorithm as the main Latitude
 blockchain.  However, the design allows for each side-chain could potentially have their own mining or consensus based
 block reward algorithms. For example, the ride-sharing sidechain could reward users for sharing data. Certain
-permissioned side-chains could potentialy use their own token which convers to the Latitude token on the main chain.
+permissioned side-chains could potentialy use their own token which converts to the Latitude token on the main chain.
 
-\subsection{Performance considerations}
+Certain side-chains, such as the smart-city applications might purely operate on a proof of work model and eliminate
+mining altogether.
+
+\subsection{Differentiated Consensus}
 When thinking of performance, one of the key metrics that is hotly debated in the community is transactions per second.
 Bitcoin is know for its long time to produce a block, on the order of minutes which limits the number of transactions
 the network can process. Figure \ref{fig:tps_speed} shows a comparison of the major blockchains today with respect to
@@ -98,36 +108,55 @@ velocity.
 
 In the context of Latitude, the performance of the blockchain is important. The blockchain will handle different types
 of data and transactions which will require different levels of consensus and trust. Figure \ref{fig:tps_lat} shows the
-different types of transactions that the Latitude blockchain can process and the performance we expect to achieve. Shown
-are four types of transactions:
-\begin{itemize}
-    \item Datastore transactions: These refer to basic transactions to store data values into the geo-spatial data
-        store. For instance, if a user shares their driving data, this can include the sensor information, lat/lng of
-        the trip taken and any mapping data collected. For ride-sharing applications, this can include any multi-model
-        ride details that the user has booked. We expect the blockchain to be able to process close to 1-10 million
-        transactions per second, since most such transactions require very low level of consensus and can tolerate 
-        eventual consistency \cite{eventual_con}.
-    \item Algorithmic computations: These refer to transactions which include executing known algorithms on the
-        blockchain. For instance, this could include the computation of various driver behavior algorithms with the
-        computation being shared among certain participants on the network. Another computation could include statistics
-        such as real-time traffic or aggregate traffic statistics shared with a city for better zoning and planning
-        purposes. The amount of consensus required is relatively small but higher than datastore operations in order to
-        ensure correct execution of algorithms and lack of malicious intent. Also such operations would require strong
-        consistency for their CRUD functionalities. We expect the Latitude design to support 10-100K transactions per
-        second at its peak usage.
-    \item Data sharing contracts: These transactions refer to the creation, deletion or arbitration of long-term sharing
-        smart contracts between participating entities. For instance, it could include a new contract between an
-        insurance company and a data provider for sharing certain types of driver score data for certain geographic
-        locations. Since these transactions have higher value they require larger amount of trust and consensus in the
-        system. Latitude shall support a transaction speed of around 100-1000 transactions per second for this category.
-    \item Governance operations: The Governance operations require the highest amount of trust and full consensus of the
-        network. These include voting to add/remove council members, critical council decisions such as forks or
-        updates/upgrades, decisions on high-value smart contract disputes, etc. The transaction velocity is low for
-        reasons of trust, accuracy and correctness and thus we expect the Latitude blockchain to support 1-10
-        transactions per second under this category.
+different types of transactions that the Latitude blockchain can process and the performance we expect to achieve.
 
-\end{itemize}
+Latitude uses the concept of {\em Differentiated Consensus} to scale to a higher transaction speed. The amount of
+consensus depends on the transaction type and the possible Byzantine attack scenarios. We next discuss each type of
+transaction and how trust/consensus would work for them:
 
+\subsection{Datastore transactions}
+These refer to basic transactions to store data values into the geo-spatial data
+store. For instance, if a user shares their driving data, this can include the sensor information, lat/lng of the trip
+taken and any mapping data collected. For ride-sharing applications, this can include any multi-model ride details that
+the user has booked. We expect the blockchain to be able to process close to 1-10 million transactions per second, since
+most such transactions require very low level of consensus and can tolerate eventual consistency \cite{eventual_con}.
+These transactions are essentially database CRUD transactions, with each request containing enough credentials to
+warrant low consensus. The credentials can include access control signatures for a permissioned table, or proofs of X
+which handle the offline oracle problem for consensus. Thus, basic database-level Paxos consensus can be used for such
+transactions to ensure high velocity. 
+
+\subsection{Algorithm executions}
+These refer to transactions which include executing known algorithms on the blockchain. For instance, this could include
+the computation of various driver behavior algorithms with the computation being shared among certain participants on
+the network. Another computation could include statistics such as real-time traffic or aggregate traffic statistics
+shared with a city for better zoning and planning purposes. The amount of consensus required is relatively small but
+higher than datastore operations in order to ensure correct execution of algorithms and lack of malicious intent. Also
+such operations would require strong consistency for their CRUD functionalities. We expect the Latitude design to
+support 10-100K transactions per second at its peak usage.
+
+These transactions essentialy use the computing resource on the network. The consensus is achieved through verifying or
+using a small set of testdata for each algorithm. The verifier nodes are randomly chosen and paid for using the
+transaction fees. Depending on how much consensus is needed, the smart contract responsible for the algorithm execution
+can lock in certain amount of token as collateral (or escrow).
+
+\subsection{Data sharing contracts}
+These transactions refer to the creation, deletion or arbitration of long-term sharing smart contracts between
+participating entities. For instance, it could include a new contract between an insurance company and a data provider
+for sharing certain types of driver score data for certain geographic locations. Since these transactions have higher
+value they require larger amount of trust and consensus in the system. Latitude shall support a transaction speed of
+around 100-1000 transactions per second for this category.
+
+The consensus required is generally high for such transactions due to the monetary value and long-term impact on the
+participants. We expect all such transactions to go through the full consensus on the blockchain and get recorded on the
+main chain. DPOS consensus should be able to support the required transaction speeds. 
+
+\subsection{Governance operations}
+The Governance operations require the highest amount of trust and full consensus of the network. These include voting to
+add/remove council members, critical council decisions such as forks or updates/upgrades, decisions on high-value smart
+contract disputes, etc. The transaction velocity is low for reasons of trust, accuracy and correctness and thus we
+expect the Latitude blockchain to support 1-10 transactions per second under this category.
+
+\subsection{Storage capacity}
 Another metric of importance for Latitude is the storage capacity in the network. This can be important for
 datastore operations. We expect the storage capacity, network bandwidth and any other computing resource to become
 available on an incentivized model as determined by usage contracts. For instance, if a user is willing to share data with
