@@ -137,12 +137,14 @@ etc. A combination of trust and stake are used in the DPOS and Governance operat
 Trust and Stake are combined into a single factor called the {\em l-factor}. The l-factor is computed as follows:
 
 \newcommand\LFACTOR{\mathit{\text{l-factor}}}
+\newcommand\SIG{\mathit{\text{SIG}}}
 \begin{equation*}
     \label{eq_l_factor}
-    \LFACTOR(E) = \eta S(E) + \gamma T(E)
+    \LFACTOR(E) = \eta \SIG(S(E)) + \gamma \SIG(T(E))
 \end{equation*}
 where
 \begin{itemize}
+    \item $\SIG(X)$ is the Sigmoid function. \[ \SIG(X) = \frac{1}{1 + e^{-x}}\]
     \item $\LFACTOR(E)$: The value of the l-factor metric for participant E.
     \item $S(E)$: The amount of stake put forth by participant E.
     \item $\eta$: Normalization factor for the stake metric.
@@ -510,8 +512,6 @@ blockchain.
 Figure \ref{fig:lat-sc} shows the high-level architecture of the Latitude Smart contract system. Latitude uses a
 WebAssembly (wasm or eWasm) based compiler for a smart contract written in Go or C++. 
 
--- Overview of the webassembly architecture.
-
 WebAssembly (or wasm) is a binary instruction format for a stack-based virtual machine. It includes a complier that is
 portable and has a compilation target for high-level languages such as C++ and Go. The Latitude smart contract system
 shall support both C++ and Go languages. The choice of wasm was to make the execution of the smart contract efficient
@@ -578,13 +578,17 @@ class sample_contract : public latitude::Contract {
 }
 \end{lstlisting}
 
+The smart contract class utilizes the following semantics:
 \begin{itemize}
-
-    \item Explain action methods.
-    \item Data structures.
-    \item Callback methods.
-    \item Events.
-
+    \item Action methods: These are special methods that result in actions taken by the smart contract. They could be
+        used to initiate payment, other smart contracts such as proofs of X, or operations to the datastore.
+    \item Data structures: These are private or public member variables in one or more objects that store dapp or
+        contract state.
+    \item Events: Events are how the smart contracts interact with the real-world occurences. These include, for
+        example, if a location update happens, or a driver score is updated, or a ride-share request is made, etc. Users
+        can define their custom events in addition to the ones provided by each application layer protocol stack.
+    \item Callback methods: These methods are trigger by the Latitude protocol layer when an event occurs. This allows
+        the smart contract to react to events.
 \end{itemize}
 
 \subsubsection{Secret contracts}
