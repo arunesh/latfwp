@@ -7,7 +7,7 @@ holders to partake in block production. The same philosophy is also used for ele
 operations are transparent and any participant can become part of such operations through honest commitment to the
 system.
 
-Like other PoS chains, DPoS doesn’t include miners who run hashes to produce blocks . Instead, an elected subset of
+Like other PoS chains, DPoS doesn't include miners who run hashes to produce blocks. Instead, an elected subset of
 participants is chosen to perform the work of validating the chain. These participants are called block producers,
 delegates, notaries, validators, forgers, or witnesses. DPOS or variants thereof is being widely used in the blockchain
 space, current blockchains utilizing DPoS include:
@@ -36,7 +36,7 @@ discussed in Section \ref{sec:trust}. The block production algorithm works as fo
 \item Block production time: This can be set to a desirable value, such as 0.5 or 1 second to make it periodic.
 \end{itemize}
 
-DPoS doesn’t attempt to 'find' a balance between the number of block producers needed to ensure that control is
+DPoS doesn't attempt to 'find' a balance between the number of block producers needed to ensure that control is
 sufficiently decentralized and the number of block producers that can easily be monitored for bad behavior. Rather, it
 explicitly sets the balance, though it can be modified later through governance protocols.
 
@@ -96,7 +96,12 @@ permissioned side-chains could potentialy use their own token which converts to 
 
 Certain side-chains, such as the smart-city applications might purely operate on a proof of work model and eliminate
 mining altogether.
-
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.90\textwidth]{tps_speed2.png}
+  \caption{Comparison of transactions per second of the major blockchains today.}
+    \label{fig:tps_speed}
+\end{figure}
 \subsection{Differentiated Consensus}
 When thinking of performance, one of the key metrics that is hotly debated in the community is transactions per second.
 Bitcoin is know for its long time to produce a block, on the order of minutes which limits the number of transactions
