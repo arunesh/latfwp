@@ -33,17 +33,32 @@ provide a multi-modal ride API that such apps can use to request rides on the pl
 
 An app that integrates with the ridesharing SDK becomes a trusted data provider. Further verification of the letigmacy
 of the data source can be performed by integrating with Trusted Execution Environments (TEEs) available on most iOS and
-Android phones today.
+Android phones today. Trusted data sources provide an increased amount of trust in as given in the proof of X system for
+Latitude.
 
 \noindent
-{\em Side-chain design:} The design of the ride-share side-chain shall include token rewards for contributing data. The
+{\em User rewards:} The design of the ride-share protocol stack shall include token rewards for contributing data. The
 reward mechanism shall be provided using a vetted smart contract system. The spatial datastore shall be used for hosting
-the data. The side-chain shall also host applications that use the data in accordance with the data contract between the
+the data. The protocol stack shall also host applications that use the data in accordance with the data contract between the
 data providers and the app developers.
 
 As an preferred third-party integration, Latitude shall integrate with SherpaShare's platform for drivers. This would
 allow greater sharing of the geo-spatial and driving data collected through SherpaShare's driver app. This will be one
 of the early launches for the beta version of the Latitude platform.
+
+In order to scale, the Ride-sharing protocol can use a side-chain design where governance rules can be baked into the
+side-chain. This is further discussed in Appendix \ref{app:sidechain}.
+
+Some of the participants on the ride-sharing protocol include:
+
+\begin{itemize}
+    \item Multi-modal ride sharing data sources: Bike and scooter apps such as LimeBike, Mobike, OFO, BlueGoGo, Youon,
+        MingBikes, etc.
+    \item Traditional ride-sharing data silos: Examples include Uber, Lyft, Gett, Uno, Curb, Sitbaq, etc.
+    \item Public transit data sources: Bus, train and other transport data.
+    \item Ride-sharing dapps: Apps can utilize such data for incentivizing users, creating ride sharing applications or
+        other creative uses.
+\end{itemize}
 
 %Overview of ridesharing applications. Big industry leaders. Statistics on rides, miles, revenue, ARPU.
 %
