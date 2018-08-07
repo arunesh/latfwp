@@ -134,13 +134,13 @@ where
 The amount of trust is used in Latitude to create proofs for various observations such as Location, Mapping, Traffic
 etc. A combination of trust and stake are used in the DPOS and Governance operations.
 
-Trust and Stake are combined into a single factor called the {\em l-factor}. The l-factor is computed as follows:
+Trust and Stake are combined into a vector quantity called the {\em l-factor}. The l-factor is computed as follows:
 
 \newcommand\LFACTOR{\mathit{\text{l-factor}}}
 \newcommand\SIG{\mathit{\text{SIG}}}
 \begin{equation*}
     \label{eq_l_factor}
-    \LFACTOR(E) = \eta \SIG(S(E)) + \gamma \SIG(T(E))
+    \LFACTOR(E) = (\eta \SIG(S(E)), \gamma \SIG(T(E)))
 \end{equation*}
 where
 \begin{itemize}
@@ -152,8 +152,9 @@ where
     \item $\gamma$: Normalization for the trust metric.
 \end{itemize}
 
-The l-factor value combines both trust and stake into a single metric which is used to determine if a node can be
-allowed to participate in key network operations. These operations include block production, acting as delegates, or
+The l-factor value combines both trust and stake into a vector metric which is used to determine if a node can be
+allowed to participate in key network operations. The vector metric allows conditions to be placed on both dimensions of
+trust and stake independently. These operations include block production, acting as delegates, or
 even participation in the governing council.
 
 \subsection{Cryptography layer} \label{sec:crypto} Latitude makes use of state-of-the-art cryptographic protocols to
@@ -529,11 +530,13 @@ WebAssembly compiles into native code and thus executes faster than Solidity or 
 a modified version of WebAssembly, namely {\it eWasm} thus reducing the cognitive burden on developers across both
 ecosystems.
 
-Latitude uses a
-modified version of Solidity (or the new Vyper programming language) as used by the Ethereum Virtual Machine. The choice
-of this language is based on the production quality of the EVM, the language tools available in the community for
-creating contract code, developer support and talent pool. Latitude shall add enhancements to the language to support
-new spatial data types, indexes, cryptographic proofs and other mechanisms that are fundamental to the platform. Some of
+%Latitude uses a
+%modified version of Solidity (or the new Vyper programming language) as used by the Ethereum Virtual Machine. The choice
+%of this language is based on the production quality of the EVM, the language tools available in the community for
+%creating contract code, developer support and talent pool. Latitude shall add enhancements to the language to support
+%new spatial data types, indexes, cryptographic proofs and other mechanisms that are fundamental to the platform.
+
+Some of
 the goals of the smart contract system include the ability to convert data policies such as GDPR \cite{gdpr} into
 Latitude smart contract code which can then get automatically verified and enforced on the blockchain.  Also its
 possible to share location data in an ephemeral manner for a specific purpose -- the data item gets automatically
