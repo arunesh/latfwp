@@ -136,20 +136,21 @@ etc. A combination of trust and stake are used in the DPOS and Governance operat
 
 Trust and Stake are combined into a vector quantity called the {\em l-factor}. The l-factor is computed as follows:
 
-\newcommand\LFACTOR{\mathit{\text{l-factor}}}
+\newcommand\LFACTOR{\overrightarrow{\mathit{\text{l-factor}}}}
 \newcommand\SIG{\mathit{\text{SIG}}}
 \begin{equation*}
     \label{eq_l_factor}
-    \LFACTOR(E) = (\eta \SIG(S(E)), \gamma \SIG(T(E)))
+    \LFACTOR(E) = \eta \SIG(S(E)\hat{k} + \gamma \SIG(T(E))\hat{j}
 \end{equation*}
 where
 \begin{itemize}
     \item $\SIG(X)$ is the Sigmoid function. \[ \SIG(X) = \frac{1}{1 + e^{-x}}\]
-    \item $\LFACTOR(E)$: The value of the l-factor metric for participant E.
+    \item $|\LFACTOR(E)|$: The value (norm) of the l-factor metric for participant E and $\LFACTOR(E)$ is the vector.
     \item $S(E)$: The amount of stake put forth by participant E.
     \item $\eta$: Normalization factor for the stake metric.
     \item $T(E)$: The amount of trust as given in the trust ledger for participant E.
     \item $\gamma$: Normalization for the trust metric.
+    \item $\hat{k}$ and $\hat{j}$ are orthogonal unit vectors.
 \end{itemize}
 
 The l-factor value combines both trust and stake into a vector metric which is used to determine if a node can be
